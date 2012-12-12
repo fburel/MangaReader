@@ -1,0 +1,279 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0CBAB2301679384F00EA2E3C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CBAB22F1679384F00EA2E3C /* UIKit.framework */; };
+		0CBAB2321679384F00EA2E3C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CBAB2311679384F00EA2E3C /* Foundation.framework */; };
+		0CBAB2341679384F00EA2E3C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CBAB2331679384F00EA2E3C /* CoreGraphics.framework */; };
+		0CBAB23A1679384F00EA2E3C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0CBAB2381679384F00EA2E3C /* InfoPlist.strings */; };
+		0CBAB23C1679384F00EA2E3C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CBAB23B1679384F00EA2E3C /* main.m */; };
+		0CBAB2401679384F00EA2E3C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CBAB23F1679384F00EA2E3C /* AppDelegate.m */; };
+		0CBAB2421679384F00EA2E3C /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CBAB2411679384F00EA2E3C /* Default.png */; };
+		0CBAB2441679384F00EA2E3C /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CBAB2431679384F00EA2E3C /* Default@2x.png */; };
+		0CBAB2461679384F00EA2E3C /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CBAB2451679384F00EA2E3C /* Default-568h@2x.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0CBAB22B1679384F00EA2E3C /* MangaReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MangaReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0CBAB22F1679384F00EA2E3C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		0CBAB2311679384F00EA2E3C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		0CBAB2331679384F00EA2E3C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		0CBAB2371679384F00EA2E3C /* MangaReader-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MangaReader-Info.plist"; sourceTree = "<group>"; };
+		0CBAB2391679384F00EA2E3C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0CBAB23B1679384F00EA2E3C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		0CBAB23D1679384F00EA2E3C /* MangaReader-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MangaReader-Prefix.pch"; sourceTree = "<group>"; };
+		0CBAB23E1679384F00EA2E3C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		0CBAB23F1679384F00EA2E3C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		0CBAB2411679384F00EA2E3C /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		0CBAB2431679384F00EA2E3C /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		0CBAB2451679384F00EA2E3C /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0CBAB2281679384F00EA2E3C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0CBAB2301679384F00EA2E3C /* UIKit.framework in Frameworks */,
+				0CBAB2321679384F00EA2E3C /* Foundation.framework in Frameworks */,
+				0CBAB2341679384F00EA2E3C /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0CBAB2201679384F00EA2E3C = {
+			isa = PBXGroup;
+			children = (
+				0CBAB2351679384F00EA2E3C /* MangaReader */,
+				0CBAB22E1679384F00EA2E3C /* Frameworks */,
+				0CBAB22C1679384F00EA2E3C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0CBAB22C1679384F00EA2E3C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0CBAB22B1679384F00EA2E3C /* MangaReader.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0CBAB22E1679384F00EA2E3C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0CBAB22F1679384F00EA2E3C /* UIKit.framework */,
+				0CBAB2311679384F00EA2E3C /* Foundation.framework */,
+				0CBAB2331679384F00EA2E3C /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0CBAB2351679384F00EA2E3C /* MangaReader */ = {
+			isa = PBXGroup;
+			children = (
+				0CBAB23E1679384F00EA2E3C /* AppDelegate.h */,
+				0CBAB23F1679384F00EA2E3C /* AppDelegate.m */,
+				0CBAB2361679384F00EA2E3C /* Supporting Files */,
+			);
+			path = MangaReader;
+			sourceTree = "<group>";
+		};
+		0CBAB2361679384F00EA2E3C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0CBAB2371679384F00EA2E3C /* MangaReader-Info.plist */,
+				0CBAB2381679384F00EA2E3C /* InfoPlist.strings */,
+				0CBAB23B1679384F00EA2E3C /* main.m */,
+				0CBAB23D1679384F00EA2E3C /* MangaReader-Prefix.pch */,
+				0CBAB2411679384F00EA2E3C /* Default.png */,
+				0CBAB2431679384F00EA2E3C /* Default@2x.png */,
+				0CBAB2451679384F00EA2E3C /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0CBAB22A1679384F00EA2E3C /* MangaReader */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0CBAB2491679384F00EA2E3C /* Build configuration list for PBXNativeTarget "MangaReader" */;
+			buildPhases = (
+				0CBAB2271679384F00EA2E3C /* Sources */,
+				0CBAB2281679384F00EA2E3C /* Frameworks */,
+				0CBAB2291679384F00EA2E3C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MangaReader;
+			productName = MangaReader;
+			productReference = 0CBAB22B1679384F00EA2E3C /* MangaReader.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0CBAB2221679384F00EA2E3C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = "florian BUREL";
+			};
+			buildConfigurationList = 0CBAB2251679384F00EA2E3C /* Build configuration list for PBXProject "MangaReader" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0CBAB2201679384F00EA2E3C;
+			productRefGroup = 0CBAB22C1679384F00EA2E3C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0CBAB22A1679384F00EA2E3C /* MangaReader */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0CBAB2291679384F00EA2E3C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0CBAB23A1679384F00EA2E3C /* InfoPlist.strings in Resources */,
+				0CBAB2421679384F00EA2E3C /* Default.png in Resources */,
+				0CBAB2441679384F00EA2E3C /* Default@2x.png in Resources */,
+				0CBAB2461679384F00EA2E3C /* Default-568h@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0CBAB2271679384F00EA2E3C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0CBAB23C1679384F00EA2E3C /* main.m in Sources */,
+				0CBAB2401679384F00EA2E3C /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		0CBAB2381679384F00EA2E3C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0CBAB2391679384F00EA2E3C /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0CBAB2471679384F00EA2E3C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		0CBAB2481679384F00EA2E3C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0CBAB24A1679384F00EA2E3C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MangaReader/MangaReader-Prefix.pch";
+				INFOPLIST_FILE = "MangaReader/MangaReader-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		0CBAB24B1679384F00EA2E3C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MangaReader/MangaReader-Prefix.pch";
+				INFOPLIST_FILE = "MangaReader/MangaReader-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0CBAB2251679384F00EA2E3C /* Build configuration list for PBXProject "MangaReader" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0CBAB2471679384F00EA2E3C /* Debug */,
+				0CBAB2481679384F00EA2E3C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0CBAB2491679384F00EA2E3C /* Build configuration list for PBXNativeTarget "MangaReader" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0CBAB24A1679384F00EA2E3C /* Debug */,
+				0CBAB24B1679384F00EA2E3C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0CBAB2221679384F00EA2E3C /* Project object */;
+}
