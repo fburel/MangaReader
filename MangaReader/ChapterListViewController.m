@@ -27,15 +27,12 @@
 
 - (void) update
 {
-    dispatch_async(dispatch_get_global_queue(2, 0), ^{
-        NSSortDescriptor * sd = [NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES];
-        self.mangas = [[MangaReaderFetcher chaperList] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sd]];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData];
-            [self.refreshControl endRefreshing];
-
-        });
-    });
+    [Manga fetchMangaListAndPerformBlock:^(NSSet *mangas) {
+        NSSortDescriptor * sd = [NSSortDescriptor sortDescriptorWithKey:@"chapterNumber" ascending:YES];
+        self.mangas = [mangas sortedArrayUsingDescriptors:[NSArray arrayWithObject:sd]];;
+        [self.tableView reloadData];
+        [self.refreshControl endRefreshing];
+    }];
 }
 
 #pragma mark - Table view data source
@@ -60,8 +57,12 @@
     if(!cell)
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     
-    cell.textLabel.text = [[self.mangas objectAtIndex:indexPath.row] title];
+    cell.textLabel.text = [[self.mangas objectAtIndex:indexPath.row] mangaName];
+    cell.detailTextLabel.text = [[[self.mangas objectAtIndex:indexPath.row] chapterNumber] stringValue];
+    
     // Configure the cell...
+    
+    cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
     
     return cell;
 }
@@ -70,14 +71,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+    Manga * manga = [self.mangas objectAtIndex:indexPath.row];
+    
 }
 
 @end

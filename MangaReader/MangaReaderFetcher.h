@@ -8,9 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+const NSString * kMangaURLDictionaryURLKey;
+const NSString * kMangaURLDictionaryDescriptionKey;
+
 @interface MangaReaderFetcher : NSObject
 
-// Retourne une NSArray de String correspondant aux chapitres disponibles
-+ (NSSet *) chaperList;
+// Retourne une NSSet de NSDictionnary correspondant aux chapitres disponibles
++ (NSSet *) chaperListForMangaURL:(NSURL *)mangaMainPageURL;
+
+
+// Retourne la liste des URL pour les images d'un chapitre donnée
++ (NSArray *) imagesURLFromMainPage:(NSURL *)mangaURL;
 
 @end

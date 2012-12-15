@@ -10,44 +10,88 @@
 #import "TFHpple.h"
 #import "Manga.h"
 
-#define kWebServiceURL @"http://www.mangareader.net/103/one-piece.html"
+#define kWebServiceURL @"http://www.mangareader.net/"
+
+const NSString * kMangaURLDictionaryURLKey = @"kMangaURLDictionaryURLKey";
+const NSString * kMangaURLDictionaryDescriptionKey = @"kMangaURLDictionaryDescriptionKey";
 
 @implementation MangaReaderFetcher
 
-+ (NSSet *) chaperList
++ (NSSet *) chaperListForMangaURL:(NSURL *)mangaMainPageURL
 {
-    NSMutableArray * array = [NSMutableArray array];
+ 
+    mangaMainPageURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@103/one-piece.html", kWebServiceURL]];
     
-    NSURL * webURL = [NSURL URLWithString:kWebServiceURL];
+    NSMutableArray * chapterListURL = [NSMutableArray array];
     
-    NSData * chapterData = [NSData dataWithContentsOfURL:webURL];
-    
-    TFHpple * mangaParser = [TFHpple hppleWithHTMLData:chapterData];
+    // Parsing
+    TFHpple * mangaParser = [TFHpple hppleWithHTMLData:[NSData dataWithContentsOfURL:mangaMainPageURL]];
     
     NSString  * mangaXPathQuery = @"//table[@id='listing']/tr/td/a";
     NSArray * chapterNode = [mangaParser searchWithXPathQuery:mangaXPathQuery];
-    
-//    TFHppleElement * table = [chapterNode lastObject];
-    
-    
+        
     for (TFHppleElement *element in chapterNode)
     {
        
-        Manga * manga = [[Manga alloc]init];
+        NSString * mangaURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.mangareader.net%@", [element objectForKey:@"href"]]];
         
-        manga.link = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.mangareader.net%@", [element objectForKey:@"href"]]];
+        NSString * description = [[element firstChild] content];
         
-        manga.title = [[element firstChild] content];
         
-        [array addObject:manga];
-        
-        [manga release];
+        NSDictionary * dic = @{kMangaURLDictionaryDescriptionKey : mangaURL, kMangaURLDictionaryDescriptionKey : description};
+        [chapterListURL addObject:dic];
     }
     
-    return [NSSet setWithArray:array];
+    return [NSSet setWithArray:chapterListURL];
     
     
 }
 
+
++ (NSArray *) imagesURLFromMainPage:(NSURL *)mangaURL;
+{
+    NSData * mangaData = [NSData dataWithContentsOfURL:mangaURL];
+    
+    TFHpple * mangaParser = [TFHpple hppleWithHTMLData:mangaData];
+
+    NSString  * mangaXPathQuery = @"//select[@id='pageMenu']";
+    NSArray * chapterNode = [mangaParser searchWithXPathQuery:mangaXPathQuery];
+    
+    TFHppleElement *node = [chapterNode lastObject];
+    
+    NSMutableArray * urls = [NSMutableArray array];
+    
+    for (TFHppleElement *element in [node children])
+    {
+        
+        NSString * stringURL = [NSString stringWithFormat:@"http://www.mangareader.net%@", [element objectForKey:@"value"]];
+        
+        
+        [urls addObject:[NSURL URLWithString:stringURL]];
+    }
+
+    NSMutableArray * datas = [NSMutableArray array];
+    
+    for (NSURL * url in urls)
+    {
+        NSLog(@"%@", url);
+        
+        NSData * imagePageData = [NSData dataWithContentsOfURL:url];
+        
+        TFHpple * imagePageParser = [TFHpple hppleWithHTMLData:imagePageData];
+        
+        NSString  * xPath = @"//div[@id='imgholder']/a";
+        
+        NSArray * imagesInfo = [imagePageParser searchWithXPathQuery:xPath];
+        
+        TFHppleElement * imageElement = [imagesInfo lastObject];
+        
+        NSLog(@"%@", [[imageElement firstChild]objectForKey:@"src"]);
+
+        [datas addObject:[NSURL URLWithString:[[imageElement firstChild]objectForKey:@"src"]]];
+    }
+    
+    return datas;
+}
 
 @end

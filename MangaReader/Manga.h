@@ -8,11 +8,21 @@
 
 #import <Foundation/Foundation.h>
 
+
+
 @interface Manga : NSObject
 
-@property (nonatomic, strong) NSString * title;
-@property (nonatomic, strong) NSString *subTitle;
-@property (nonatomic, strong) NSURL * link;
-@property (nonatomic, strong) NSArray * imagesData;
+@property (nonatomic, retain) NSString * mangaName;
+@property (nonatomic, retain) NSString * chapterTitle;
+@property (nonatomic, retain) NSNumber * chapterNumber;
+@property (nonatomic, retain) NSArray * imageURLs;
+@property (nonatomic, retain) NSURL * mainPageURL;
+
+@end
+
+@interface Manga (MangaReaderFetcher)
+
++ (void) fetchMangaListAndPerformBlock:(void (^)(NSSet * mangas))mangaBlock;
+- (void) fetchURLs;
 
 @end
