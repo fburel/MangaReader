@@ -36,8 +36,8 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    self.navigationController.navigationBarHidden = YES;
-    self.navigationController.toolbarHidden = YES;
+//    self.navigationController.navigationBarHidden = YES;
+//    self.navigationController.toolbarHidden = YES;
 }
 
 
@@ -52,6 +52,7 @@
     // Ajout du reader
     if(!self.readerView) self.readerView = [[FBReaderView alloc]initWithFrame:self.view.bounds];
     self.readerView.dataSource = self;
+    self.readerView.delegate = self;
     [self.view addSubview:self.readerView];
     
     // Ajout de la waitView
@@ -102,7 +103,7 @@
 {
     UIView * cell = [[UIView alloc]initWithFrame:self.readerView.bounds];
     
-    cell.backgroundColor = [UIColor redColor];
+    cell.backgroundColor = [UIColor blackColor];
     
     UIActivityIndicatorView * spinner = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     spinner.center = cell.center;
@@ -117,6 +118,7 @@
         UIImageView * imageView = [[UIImageView alloc]initWithFrame:cell.bounds];
         imageView.contentMode = UIViewContentModeScaleAspectFit;
         imageView.image = [UIImage imageWithData:imageData];
+        [cell addSubview:imageView];
     }
     else
     {
@@ -129,5 +131,10 @@
     
     return cell;
 
+}
+
+- (void)readerView:(FBReaderView *)readerView willPresentViewAtIndex:(NSInteger)index
+{
+    self.title = [NSString stringWithFormat:@"page %d / %d", index + 1, self.manga.imageURLs.count];
 }
 @end

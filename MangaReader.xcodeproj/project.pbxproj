@@ -7,9 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0CADFB6C167CA95B001B4490 /* HGPageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CADFB68167CA95B001B4490 /* HGPageScrollView.m */; };
-		0CADFB6D167CA95B001B4490 /* HGPageScrollView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CADFB69167CA95B001B4490 /* HGPageScrollView.xib */; };
-		0CADFB6E167CA95B001B4490 /* HGPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CADFB6B167CA95B001B4490 /* HGPageView.m */; };
+		0C72C207167E5226000A553A /* FBReaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C72C206167E5226000A553A /* FBReaderView.m */; };
 		0CADFB71167CB306001B4490 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CADFB70167CB306001B4490 /* QuartzCore.framework */; };
 		0CBAB2301679384F00EA2E3C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CBAB22F1679384F00EA2E3C /* UIKit.framework */; };
 		0CBAB2321679384F00EA2E3C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CBAB2311679384F00EA2E3C /* Foundation.framework */; };
@@ -31,11 +29,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0CADFB67167CA95B001B4490 /* HGPageScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HGPageScrollView.h; sourceTree = "<group>"; };
-		0CADFB68167CA95B001B4490 /* HGPageScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HGPageScrollView.m; sourceTree = "<group>"; };
-		0CADFB69167CA95B001B4490 /* HGPageScrollView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HGPageScrollView.xib; sourceTree = "<group>"; };
-		0CADFB6A167CA95B001B4490 /* HGPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HGPageView.h; sourceTree = "<group>"; };
-		0CADFB6B167CA95B001B4490 /* HGPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HGPageView.m; sourceTree = "<group>"; };
+		0C72C205167E5226000A553A /* FBReaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBReaderView.h; sourceTree = "<group>"; };
+		0C72C206167E5226000A553A /* FBReaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBReaderView.m; sourceTree = "<group>"; };
 		0CADFB70167CB306001B4490 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0CBAB22B1679384F00EA2E3C /* MangaReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MangaReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CBAB22F1679384F00EA2E3C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -83,16 +78,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0CADFB66167CA95B001B4490 /* HGPageScrollView */ = {
+		0C72C201167E4E8C000A553A /* ChapterList */ = {
 			isa = PBXGroup;
 			children = (
-				0CADFB67167CA95B001B4490 /* HGPageScrollView.h */,
-				0CADFB68167CA95B001B4490 /* HGPageScrollView.m */,
-				0CADFB69167CA95B001B4490 /* HGPageScrollView.xib */,
-				0CADFB6A167CA95B001B4490 /* HGPageView.h */,
-				0CADFB6B167CA95B001B4490 /* HGPageView.m */,
+				0CBAB273167A6CEE00EA2E3C /* ChapterListViewController.h */,
+				0CBAB274167A6CEE00EA2E3C /* ChapterListViewController.m */,
 			);
-			path = HGPageScrollView;
+			name = ChapterList;
+			sourceTree = "<group>";
+		};
+		0C72C202167E4EA3000A553A /* MangaViewer */ = {
+			isa = PBXGroup;
+			children = (
+				0CBAB2AE167A717900EA2E3C /* MangaViewController.h */,
+				0CBAB2AF167A717900EA2E3C /* MangaViewController.m */,
+			);
+			name = MangaViewer;
+			sourceTree = "<group>";
+		};
+		0C72C203167E4EAC000A553A /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				0C72C201167E4E8C000A553A /* ChapterList */,
+				0C72C202167E4EA3000A553A /* MangaViewer */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		0C72C204167E4EC7000A553A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0C72C205167E5226000A553A /* FBReaderView.h */,
+				0C72C206167E5226000A553A /* FBReaderView.m */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		0CBAB2201679384F00EA2E3C = {
@@ -127,13 +146,10 @@
 		0CBAB2351679384F00EA2E3C /* MangaReader */ = {
 			isa = PBXGroup;
 			children = (
-				0CBAB2D7167CA1BC00EA2E3C /* MangaReader */,
-				0CBAB273167A6CEE00EA2E3C /* ChapterListViewController.h */,
-				0CBAB274167A6CEE00EA2E3C /* ChapterListViewController.m */,
-				0CBAB2AE167A717900EA2E3C /* MangaViewController.h */,
-				0CBAB2AF167A717900EA2E3C /* MangaViewController.m */,
-				0CADFB66167CA95B001B4490 /* HGPageScrollView */,
 				0CBAB2D9167CA1D000EA2E3C /* Model */,
+				0CBAB2D7167CA1BC00EA2E3C /* Service */,
+				0C72C203167E4EAC000A553A /* Controllers */,
+				0C72C204167E4EC7000A553A /* Views */,
 				0CBAB23F1679384F00EA2E3C /* AppDelegate.m */,
 				0CBAB23E1679384F00EA2E3C /* AppDelegate.h */,
 				0CBAB2361679384F00EA2E3C /* Supporting Files */,
@@ -168,14 +184,14 @@
 			name = TFHpple;
 			sourceTree = "<group>";
 		};
-		0CBAB2D7167CA1BC00EA2E3C /* MangaReader */ = {
+		0CBAB2D7167CA1BC00EA2E3C /* Service */ = {
 			isa = PBXGroup;
 			children = (
 				0CBAB270167A5F6C00EA2E3C /* TFHpple */,
 				0CBAB24C167938A600EA2E3C /* MangaReaderFetcher.h */,
 				0CBAB24D167938A600EA2E3C /* MangaReaderFetcher.m */,
 			);
-			name = MangaReader;
+			name = Service;
 			sourceTree = "<group>";
 		};
 		0CBAB2D9167CA1D000EA2E3C /* Model */ = {
@@ -242,7 +258,6 @@
 				0CBAB2421679384F00EA2E3C /* Default.png in Resources */,
 				0CBAB2441679384F00EA2E3C /* Default@2x.png in Resources */,
 				0CBAB2461679384F00EA2E3C /* Default-568h@2x.png in Resources */,
-				0CADFB6D167CA95B001B4490 /* HGPageScrollView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,8 +277,7 @@
 				0CBAB26F167A5F6500EA2E3C /* XPathQuery.m in Sources */,
 				0CBAB275167A6CEE00EA2E3C /* ChapterListViewController.m in Sources */,
 				0CBAB2B0167A717900EA2E3C /* MangaViewController.m in Sources */,
-				0CADFB6C167CA95B001B4490 /* HGPageScrollView.m in Sources */,
-				0CADFB6E167CA95B001B4490 /* HGPageView.m in Sources */,
+				0C72C207167E5226000A553A /* FBReaderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

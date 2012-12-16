@@ -11,7 +11,7 @@
 #import "FBReaderView.h"
 
 @interface MangaViewController : UIViewController
-<FBReaderViewDatasource>
+<FBReaderViewDatasource, FBReaderViewDelegate>
 
 @property (nonatomic, retain) Manga * manga;
 

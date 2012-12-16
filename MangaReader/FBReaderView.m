@@ -12,6 +12,7 @@
 
 @synthesize indexForPresentedView = _indexForPresentedView;
 @synthesize dataSource = _dataSource;
+@synthesize delegate = _delegate;
 
 - (void)reloadData
 {
@@ -36,8 +37,11 @@
     self.indexForPresentedView = index;
     
     
+    [self.delegate readerView:self willPresentViewAtIndex:self.indexForPresentedView];
+    
     UIView * viewToPresent = [self.dataSource readerView:self viewAtIndex:self.indexForPresentedView];
     
+
     void(^animationBlock)() = ^{
         [self addSubview:viewToPresent];
     };
@@ -52,7 +56,7 @@
     UIViewAnimationOptions animation = isBeforeCurrentView ? UIViewAnimationOptionTransitionCurlDown : UIViewAnimationOptionTransitionCurlUp;
     
     if(animated)
-        [UIView transitionWithView:self duration:0.1 options:animation animations:animationBlock completion:completionBlock];
+        [UIView transitionWithView:self duration:1 options:animation animations:animationBlock completion:completionBlock];
     else
     {
         animationBlock();
@@ -66,9 +70,14 @@
     
     if(!self.gestureRecognizers)
     {
-        UISwipeGestureRecognizer * swipe = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipe:)];
-        [self addGestureRecognizer:swipe];
-        [swipe release];
+        UISwipeGestureRecognizer * swipeL = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipe:)];
+        swipeL.direction = UISwipeGestureRecognizerDirectionLeft;
+        [self addGestureRecognizer:swipeL];
+        [swipeL release];
+        UISwipeGestureRecognizer * swipeR = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipe:)];
+        swipeR.direction = UISwipeGestureRecognizerDirectionRight;
+        [self addGestureRecognizer:swipeR];
+        [swipeR release];
     }
        
     [self presentPageAtIndex:self.indexForPresentedView animated:NO];
@@ -78,9 +87,9 @@
 - (void) handleSwipe:(UISwipeGestureRecognizer *)sender
 {
     if(sender.direction == UISwipeGestureRecognizerDirectionLeft)
-        [self presentPageAtIndex:++self.indexForPresentedView animated:YES];
+        [self presentPageAtIndex:(self.indexForPresentedView + 1) animated:YES];
     if(sender.direction == UISwipeGestureRecognizerDirectionRight)
-        [self presentPageAtIndex:--self.indexForPresentedView animated:YES];
+        [self presentPageAtIndex:(self.indexForPresentedView - 1) animated:YES];
 }
 
 

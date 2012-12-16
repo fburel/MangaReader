@@ -17,9 +17,16 @@
 
 @end
 
+@protocol FBReaderViewDelegate <NSObject>
+@optional
+- (void)readerView:(FBReaderView *)readerView willPresentViewAtIndex:(NSInteger)index;
+
+@end
 @interface FBReaderView : UIView
 
 @property (nonatomic, assign) id<FBReaderViewDatasource> dataSource;
+@property (nonatomic, assign) id<FBReaderViewDelegate> delegate;
+
 @property (nonatomic, assign) NSInteger indexForPresentedView;
 - (void) reloadViewAtIndex:(NSInteger)index;
 - (void)reloadData;
