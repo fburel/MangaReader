@@ -25,23 +25,19 @@
 {
     [super viewDidLoad];
 
-
-    // block a conditionnée si ios > 6
-    /*
-    self.refreshControl = [[[UIRefreshControl alloc]init] autorelease];
-    [self.refreshControl addTarget:self action:@selector(update) forControlEvents:UIControlEventValueChanged];
-     */
     [self update];
     
 }
 
 - (void) update
 {
+    
+    [[UIApplication sharedApplication]setNetworkActivityIndicatorVisible:YES];
     [Manga fetchMangaListAndPerformBlock:^(NSSet *mangas) {
         NSSortDescriptor * sd = [NSSortDescriptor sortDescriptorWithKey:@"chapterNumber" ascending:YES];
         self.mangas = [mangas sortedArrayUsingDescriptors:[NSArray arrayWithObject:sd]];;
         [self.tableView reloadData];
-//        [self.refreshControl endRefreshing];
+        [[UIApplication sharedApplication]setNetworkActivityIndicatorVisible:NO];
     }];
 }
 
