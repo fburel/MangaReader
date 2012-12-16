@@ -38,7 +38,7 @@ const NSString * kMangaURLDictionaryDescriptionKey = @"kMangaURLDictionaryDescri
         NSString * description = [[element firstChild] content];
         
         
-        NSDictionary * dic = @{kMangaURLDictionaryDescriptionKey : mangaURL, kMangaURLDictionaryDescriptionKey : description};
+        NSDictionary * dic = @{kMangaURLDictionaryURLKey : mangaURL, kMangaURLDictionaryDescriptionKey : description};
         [chapterListURL addObject:dic];
     }
     

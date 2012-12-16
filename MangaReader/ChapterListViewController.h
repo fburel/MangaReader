@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Manga.h"
+#import "MangaViewController.h"
 
 @interface ChapterListViewController : UITableViewController
 

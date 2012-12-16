@@ -9,6 +9,21 @@
 #import "Manga.h"
 #import "MangaReaderFetcher.h"
 
+@implementation Manga (ImageLoader)
+
+- (void) fetchImageAtIndex:(NSUInteger)index andPerformBlock:(void(^) (NSData * imageData))block
+{
+   dispatch_async(dispatch_get_global_queue(2, 0), ^{
+       NSData * imageData = [NSData dataWithContentsOfURL:[self.imageURLs objectAtIndex:index]];
+       NSLog(@"Downloaded image %d - performing block", index);
+       dispatch_async(dispatch_get_main_queue(), ^{
+           block(imageData);
+       });
+   });
+}
+
+@end
+
 @implementation Manga (MangaReaderFetcher)
 
 + (void) fetchMangaListAndPerformBlock:(void (^)(NSSet * mangas))mangaBlock
@@ -22,7 +37,10 @@
         [chapters enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
             Manga * manga = [[Manga alloc]init];
             manga.mangaName = @"One Piece";
-            manga.chapterNumber = [NSNumber numberWithInt:[[obj objectForKey:kMangaURLDictionaryDescriptionKey] intValue]];
+            
+            manga.chapterTitle = [obj objectForKey:kMangaURLDictionaryDescriptionKey];
+            manga.chapterNumber = [NSNumber numberWithInteger:[manga.chapterTitle integerValue]];
+           
             manga.mainPageURL = [obj objectForKey:kMangaURLDictionaryURLKey];
             
             [mangas addObject:manga];
@@ -42,7 +60,6 @@
     if(!self.imageURLs)
         self.imageURLs = [MangaReaderFetcher imagesURLFromMainPage:self.mainPageURL];
 }
-
 
 @end
 

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0CADFB6C167CA95B001B4490 /* HGPageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CADFB68167CA95B001B4490 /* HGPageScrollView.m */; };
+		0CADFB6D167CA95B001B4490 /* HGPageScrollView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CADFB69167CA95B001B4490 /* HGPageScrollView.xib */; };
+		0CADFB6E167CA95B001B4490 /* HGPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CADFB6B167CA95B001B4490 /* HGPageView.m */; };
+		0CADFB71167CB306001B4490 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CADFB70167CB306001B4490 /* QuartzCore.framework */; };
 		0CBAB2301679384F00EA2E3C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CBAB22F1679384F00EA2E3C /* UIKit.framework */; };
 		0CBAB2321679384F00EA2E3C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CBAB2311679384F00EA2E3C /* Foundation.framework */; };
 		0CBAB2341679384F00EA2E3C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CBAB2331679384F00EA2E3C /* CoreGraphics.framework */; };
@@ -27,6 +31,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0CADFB67167CA95B001B4490 /* HGPageScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HGPageScrollView.h; sourceTree = "<group>"; };
+		0CADFB68167CA95B001B4490 /* HGPageScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HGPageScrollView.m; sourceTree = "<group>"; };
+		0CADFB69167CA95B001B4490 /* HGPageScrollView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HGPageScrollView.xib; sourceTree = "<group>"; };
+		0CADFB6A167CA95B001B4490 /* HGPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HGPageView.h; sourceTree = "<group>"; };
+		0CADFB6B167CA95B001B4490 /* HGPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HGPageView.m; sourceTree = "<group>"; };
+		0CADFB70167CB306001B4490 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0CBAB22B1679384F00EA2E3C /* MangaReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MangaReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CBAB22F1679384F00EA2E3C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0CBAB2311679384F00EA2E3C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -62,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CADFB71167CB306001B4490 /* QuartzCore.framework in Frameworks */,
 				0CBAB272167A5FC100EA2E3C /* libxml2.dylib in Frameworks */,
 				0CBAB2301679384F00EA2E3C /* UIKit.framework in Frameworks */,
 				0CBAB2321679384F00EA2E3C /* Foundation.framework in Frameworks */,
@@ -72,6 +83,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0CADFB66167CA95B001B4490 /* HGPageScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				0CADFB67167CA95B001B4490 /* HGPageScrollView.h */,
+				0CADFB68167CA95B001B4490 /* HGPageScrollView.m */,
+				0CADFB69167CA95B001B4490 /* HGPageScrollView.xib */,
+				0CADFB6A167CA95B001B4490 /* HGPageView.h */,
+				0CADFB6B167CA95B001B4490 /* HGPageView.m */,
+			);
+			path = HGPageScrollView;
+			sourceTree = "<group>";
+		};
 		0CBAB2201679384F00EA2E3C = {
 			isa = PBXGroup;
 			children = (
@@ -92,6 +115,7 @@
 		0CBAB22E1679384F00EA2E3C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0CADFB70167CB306001B4490 /* QuartzCore.framework */,
 				0CBAB271167A5FC100EA2E3C /* libxml2.dylib */,
 				0CBAB22F1679384F00EA2E3C /* UIKit.framework */,
 				0CBAB2311679384F00EA2E3C /* Foundation.framework */,
@@ -108,6 +132,7 @@
 				0CBAB274167A6CEE00EA2E3C /* ChapterListViewController.m */,
 				0CBAB2AE167A717900EA2E3C /* MangaViewController.h */,
 				0CBAB2AF167A717900EA2E3C /* MangaViewController.m */,
+				0CADFB66167CA95B001B4490 /* HGPageScrollView */,
 				0CBAB2D9167CA1D000EA2E3C /* Model */,
 				0CBAB23F1679384F00EA2E3C /* AppDelegate.m */,
 				0CBAB23E1679384F00EA2E3C /* AppDelegate.h */,
@@ -217,6 +242,7 @@
 				0CBAB2421679384F00EA2E3C /* Default.png in Resources */,
 				0CBAB2441679384F00EA2E3C /* Default@2x.png in Resources */,
 				0CBAB2461679384F00EA2E3C /* Default-568h@2x.png in Resources */,
+				0CADFB6D167CA95B001B4490 /* HGPageScrollView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,6 +262,8 @@
 				0CBAB26F167A5F6500EA2E3C /* XPathQuery.m in Sources */,
 				0CBAB275167A6CEE00EA2E3C /* ChapterListViewController.m in Sources */,
 				0CBAB2B0167A717900EA2E3C /* MangaViewController.m in Sources */,
+				0CADFB6C167CA95B001B4490 /* HGPageScrollView.m in Sources */,
+				0CADFB6E167CA95B001B4490 /* HGPageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,7 +336,9 @@
 				GCC_PREFIX_HEADER = "MangaReader/MangaReader-Prefix.pch";
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				INFOPLIST_FILE = "MangaReader/MangaReader-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -320,7 +350,9 @@
 				GCC_PREFIX_HEADER = "MangaReader/MangaReader-Prefix.pch";
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				INFOPLIST_FILE = "MangaReader/MangaReader-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

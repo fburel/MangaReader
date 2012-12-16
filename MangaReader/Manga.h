@@ -26,3 +26,9 @@
 - (void) fetchURLs;
 
 @end
+
+@interface Manga (ImageLoader)
+
+- (void) fetchImageAtIndex:(NSUInteger)index andPerformBlock:(void(^) (NSData * imageData))block;
+
+@end

@@ -22,8 +22,9 @@
     
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
-    self.window.rootViewController = [[[ChapterListViewController alloc]initWithStyle:UITableViewStyleGrouped] autorelease];
-    
+   
+    ChapterListViewController * vc = [[[ChapterListViewController alloc]initWithStyle:UITableViewStyleGrouped] autorelease];
+    self.window.rootViewController = [[[UINavigationController alloc]initWithRootViewController:vc] autorelease];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;

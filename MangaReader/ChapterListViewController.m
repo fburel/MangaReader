@@ -20,9 +20,14 @@
 {
     [super viewDidLoad];
 
-    self.refreshControl = [[UIRefreshControl alloc]init];
+
+    // block a conditionnée si ios > 6
+    /*
+    self.refreshControl = [[[UIRefreshControl alloc]init] autorelease];
     [self.refreshControl addTarget:self action:@selector(update) forControlEvents:UIControlEventValueChanged];
+     */
     [self update];
+    
 }
 
 - (void) update
@@ -31,7 +36,7 @@
         NSSortDescriptor * sd = [NSSortDescriptor sortDescriptorWithKey:@"chapterNumber" ascending:YES];
         self.mangas = [mangas sortedArrayUsingDescriptors:[NSArray arrayWithObject:sd]];;
         [self.tableView reloadData];
-        [self.refreshControl endRefreshing];
+//        [self.refreshControl endRefreshing];
     }];
 }
 
@@ -55,14 +60,10 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if(!cell)
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     
     cell.textLabel.text = [[self.mangas objectAtIndex:indexPath.row] mangaName];
-    cell.detailTextLabel.text = [[[self.mangas objectAtIndex:indexPath.row] chapterNumber] stringValue];
-    
-    // Configure the cell...
-    
-    cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+    cell.detailTextLabel.text = [[self.mangas objectAtIndex:indexPath.row] chapterTitle];
     
     return cell;
 }
@@ -72,7 +73,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Manga * manga = [self.mangas objectAtIndex:indexPath.row];
-    
+    MangaViewController * vc = [[MangaViewController alloc]init];
+    vc.manga = manga;
+    [self.navigationController pushViewController:vc animated:YES];
+    [vc release];
 }
 
 @end

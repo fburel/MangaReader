@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "Manga.h"
+#import "HGPageScrollView.h"
 
-@interface MangaViewController : UICollectionViewController
+@interface MangaViewController : UIViewController
+<HGPageScrollViewDataSource, HGPageScrollViewDelegate>
 
 @property (nonatomic, retain) Manga * manga;
+@property (nonatomic, retain) HGPageScrollView * pageScrollView;
 
 @end
