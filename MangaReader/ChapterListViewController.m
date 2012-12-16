@@ -16,6 +16,11 @@
 
 @implementation ChapterListViewController
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    self.navigationController.navigationBarHidden = NO;
+    self.navigationController.toolbarHidden = NO;
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];

@@ -34,13 +34,11 @@
     [super dealloc];
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)toogleBarVisibility
 {
-//    self.navigationController.navigationBarHidden = YES;
-//    self.navigationController.toolbarHidden = YES;
+    self.navigationController.navigationBarHidden = !self.navigationController.navigationBarHidden;
+    self.navigationController.toolbarHidden = !self.navigationController.toolbarHidden;
 }
-
-
 
 - (void)viewDidLoad
 {
@@ -48,9 +46,11 @@
 	// Do any additional setup after loading the view.
     self.imagesDictionnary = [NSMutableDictionary dictionary];
     
+    self.view.backgroundColor = [UIColor blackColor];
     
-    // Ajout du reader
+       // Ajout du reader
     if(!self.readerView) self.readerView = [[FBReaderView alloc]initWithFrame:self.view.bounds];
+    self.readerView.autoresizingMask = (UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth);
     self.readerView.dataSource = self;
     self.readerView.delegate = self;
     [self.view addSubview:self.readerView];
@@ -58,6 +58,14 @@
     // Ajout de la waitView
     [self.view addSubview:self.waitView];
     
+    
+    // Affichage des bar de nav sur dblClick
+    UITapGestureRecognizer * dbTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(toogleBarVisibility)];
+    dbTap.numberOfTapsRequired = 2;
+    [self.view addGestureRecognizer:dbTap];
+    [dbTap release];
+    
+
     if(!self.manga.imageURLs)
     {
         self.waitView.hidden = NO;
@@ -85,7 +93,8 @@
         UIActivityIndicatorView * spinner = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
         spinner.center = _waitView.center;
         [spinner startAnimating];
-        
+        spinner.autoresizingMask = (UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin);
+        _waitView.autoresizingMask = (UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth);
         [_waitView addSubview:spinner];
     }
     
