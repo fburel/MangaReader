@@ -9,7 +9,6 @@
 #import "MangaViewController.h"
 
 @interface MangaViewController ()
-@property (nonatomic, retain) NSMutableDictionary * imagesDictionnary;
 @property (nonatomic, retain) UIView * waitView;
 @property (nonatomic, retain) IBOutlet FBReaderView * readerView;
 @end
@@ -17,7 +16,6 @@
 @implementation MangaViewController
 
 @synthesize manga = _manga;
-@synthesize imagesDictionnary = _imagesDictionnary;
 @synthesize waitView = _waitView;
 @synthesize readerView = _readerView;
 
@@ -28,7 +26,6 @@
 -(void)dealloc
 {
     [_manga release];
-    [_imagesDictionnary release];
     [_waitView release];
     [_readerView release];
     [super dealloc];
@@ -42,9 +39,10 @@
 
 - (void)viewDidLoad
 {
+    
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    self.imagesDictionnary = [NSMutableDictionary dictionary];
+    
     
     self.view.backgroundColor = [UIColor blackColor];
     
@@ -120,7 +118,15 @@
     
     [cell addSubview:spinner];
     
-    NSData * imageData = [self.imagesDictionnary objectForKey:[self.manga.imageURLs objectAtIndex:index]];
+    NSFileManager * fileManager = [[NSFileManager alloc]init];
+    NSURL * pathURL = [[fileManager URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask] lastObject];
+    
+    
+    NSString * img = [NSString stringWithFormat:@"%@ - img%d.jpeg", self.manga.chapterTitle ,index];
+    
+    pathURL = [pathURL URLByAppendingPathComponent:img isDirectory:NO];
+    
+    NSData * imageData = [NSData dataWithContentsOfURL:pathURL];
     
     if(imageData)
     {
@@ -133,7 +139,7 @@
     {
         [self.manga fetchImageAtIndex:index andPerformBlock:^(NSData *imageData) {
             if(imageData)
-                [self.imagesDictionnary setObject:imageData forKey:[self.manga.imageURLs objectAtIndex:index]];
+                [imageData writeToURL:pathURL atomically:YES];
             [self.readerView reloadViewAtIndex:index];
         }];
     }
