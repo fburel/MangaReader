@@ -34,7 +34,7 @@
     
     [[UIApplication sharedApplication]setNetworkActivityIndicatorVisible:YES];
     [Manga fetchMangaListAndPerformBlock:^(NSSet *mangas) {
-        NSSortDescriptor * sd = [NSSortDescriptor sortDescriptorWithKey:@"chapterNumber" ascending:YES];
+        NSSortDescriptor * sd = [NSSortDescriptor sortDescriptorWithKey:@"chapterNumber" ascending:NO];
         self.mangas = [mangas sortedArrayUsingDescriptors:[NSArray arrayWithObject:sd]];;
         [self.tableView reloadData];
         [[UIApplication sharedApplication]setNetworkActivityIndicatorVisible:NO];

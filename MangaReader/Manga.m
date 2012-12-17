@@ -39,7 +39,10 @@
             manga.mangaName = @"One Piece";
             
             manga.chapterTitle = [obj objectForKey:kMangaURLDictionaryDescriptionKey];
-            manga.chapterNumber = [NSNumber numberWithInteger:[manga.chapterTitle integerValue]];
+           
+            // Fetch the chapterNumber
+            
+            manga.chapterNumber = [NSNumber numberWithInteger:[[manga.chapterTitle substringFromIndex:(manga.chapterTitle.length - 4)] integerValue]];
            
             manga.mainPageURL = [obj objectForKey:kMangaURLDictionaryURLKey];
             
