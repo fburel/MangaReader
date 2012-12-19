@@ -9,43 +9,68 @@
 #import "MangaViewController.h"
 
 @interface MangaViewController ()
-@property (nonatomic, retain) NSMutableDictionary * imagesDictionnary;
+@property (nonatomic, retain) UIView * waitView;
+@property (nonatomic, retain) IBOutlet FBReaderView * readerView;
 @end
 
 @implementation MangaViewController
+
+@synthesize manga = _manga;
+@synthesize waitView = _waitView;
+@synthesize readerView = _readerView;
+
+
+
+#pragma mark - view lifecycle
+
+-(void)dealloc
+{
+    [_manga release];
+    [_waitView release];
+    [_readerView release];
+    [super dealloc];
+}
+
+- (void)toogleBarVisibility
+{
+    self.navigationController.navigationBarHidden = !self.navigationController.navigationBarHidden;
+    self.navigationController.toolbarHidden = !self.navigationController.toolbarHidden;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    self.imagesDictionnary = [NSMutableDictionary dictionary];
     
-    UIBarButtonItem * btn = [[UIBarButtonItem alloc]initWithTitle:@"Edit" style:UIBarButtonItemStyleDone target:self.pageScrollView action:@selector(deselectPageAnimated:)];
-    self.navigationItem.rightBarButtonItem = btn;
-    [btn release];
+    self.view.backgroundColor = [UIColor blackColor];
+    
+    // Ajout du reader
+    if(!self.readerView) self.readerView = [[[FBReaderView alloc]initWithFrame:self.view.bounds] autorelease];
+    self.readerView.autoresizingMask = (UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth);
+    self.readerView.dataSource = self;
+    self.readerView.delegate = self;
+    [self.view addSubview:self.readerView];
+    
+    // Ajout de la waitView
+    [self.view addSubview:self.waitView];
+    
+    
+    // Affichage des bar de nav sur dblClick
+    UITapGestureRecognizer * dbTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(toogleBarVisibility)];
+    dbTap.numberOfTapsRequired = 2;
+    [self.view addGestureRecognizer:dbTap];
+    [dbTap release];
+    
     
     if(!self.manga.imageURLs)
     {
-        
-        self.pageScrollView = [[[NSBundle mainBundle] loadNibNamed:@"HGPageScrollView" owner:self options:nil] lastObject];
-        self.pageScrollView.delegate = self;
-        self.pageScrollView.dataSource = self;
-        self.pageScrollView.frame = self.view.bounds;
-        [self.view addSubview:self.pageScrollView];
-        
-        UIView * waitView = [[UIView alloc]initWithFrame:self.view.bounds];
-        
-        
-        waitView.backgroundColor = [UIColor redColor];
-        
-        [self.view addSubview:waitView];
-        waitView.hidden = NO;
-        
+        self.waitView.hidden = NO;
         dispatch_async(dispatch_get_global_queue(2, 0), ^{
             [self.manga fetchURLs];
             dispatch_async(dispatch_get_main_queue(), ^{
-                [waitView removeFromSuperview];
-                [self.pageScrollView reloadData];
+                self.waitView.hidden = YES;
+                [self.readerView reloadData];
+                [self startLoadingImages];
             });
             
         });
@@ -54,77 +79,95 @@
     }
 }
 
-
-#pragma mark - PageScrollView
-
-// This mechanism works the same as in UITableViewCells.
-- (HGPageView *)pageScrollView:(HGPageScrollView *)scrollView viewForPageAtIndex:(NSInteger)index
+- (NSURL *) urlForImageAtIndex:(NSInteger)index
 {
-    static NSString * CellIdentifier = @"PageCell";
-    static NSInteger CellImageViewTag = 666;
-    static NSInteger CellActivityIndicatorTag = 999;
+    NSFileManager * fm = [[NSFileManager alloc]init];
+    NSURL * path = [[fm URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask] lastObject];
+    NSString * imageName = [NSString stringWithFormat:@"%@ - %d", self.manga.chapterTitle, index];
+    path = [path URLByAppendingPathComponent:imageName isDirectory:NO];
+    [fm release];
+    return path;
     
-    HGPageView * cell = [self.pageScrollView dequeueReusablePageWithIdentifier:CellIdentifier];
+}
+- (void) startLoadingImages
+{
     
-    if(!cell)
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        for(int i = 0; i < self.manga.imageURLs.count; i++)
+        {
+            NSData * imageData = [NSData dataWithContentsOfURL:[self urlForImageAtIndex:i]];
+            if(!imageData)
+            {
+                [self.manga fetchImageAtIndex:i andPerformBlock:^(NSData *imageData) {
+                    [imageData writeToURL:[self urlForImageAtIndex:i] atomically:YES];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.readerView reloadViewAtIndex:i];
+                    });
+                }];
+            }
+            
+        }
+    });
+}
+
+#pragma mark - lazy getter
+
+- (UIView *)waitView
+{
+    if(!_waitView)
     {
-        cell = [[[HGPageView alloc]initWithFrame:self.pageScrollView.bounds] autorelease];
-        cell.backgroundColor = [UIColor blackColor];
-        
-        UIImageView * imageView = [[UIImageView alloc]initWithFrame:cell.bounds];
-        imageView.tag = CellImageViewTag;
-        [cell addSubview:imageView];
-        [imageView release];
-        
+        _waitView = [[UIView alloc]initWithFrame:self.view.bounds];
+        _waitView.backgroundColor = [UIColor blackColor];
         UIActivityIndicatorView * spinner = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-        spinner.hidesWhenStopped = YES;
-        spinner.center = CGPointMake(cell.bounds.size.width  /2., cell.bounds.size.height  /2.);
-        [cell addSubview:spinner];
+        spinner.center = _waitView.center;
+        [spinner startAnimating];
+        spinner.autoresizingMask = (UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin);
+        _waitView.autoresizingMask = (UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth);
+        [_waitView addSubview:spinner];
         [spinner release];
     }
-    UIImageView * imageView = (UIImageView *)[cell viewWithTag:CellImageViewTag];
-    UIActivityIndicatorView * spinner = (UIActivityIndicatorView *)[cell viewWithTag:CellActivityIndicatorTag];
-    UIImage * image = [self.imagesDictionnary objectForKey:[self.manga.imageURLs objectAtIndex:index]];
     
-    if(!image)
+    return _waitView;
+}
+
+#pragma mark - FBReaderViewDataSource
+
+- (NSInteger)numberOfPageInReaderView:(FBReaderView *)imageReaderView
+{
+    return self.manga.imageURLs.count;
+}
+
+- (UIView *)readerView:(FBReaderView *)readerView viewAtIndex:(NSInteger)index
+{
+    UIView * cell = [[[UIView alloc]initWithFrame:self.readerView.bounds] autorelease];
+    
+    cell.backgroundColor = [UIColor blackColor];
+    
+    UIActivityIndicatorView * spinner = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    spinner.center = cell.center;
+    [spinner startAnimating];
+    
+    [cell addSubview:spinner];
+    
+    [spinner release];
+    
+    NSData * imageData = [NSData dataWithContentsOfURL:[self urlForImageAtIndex:index]];
+    
+    if(imageData)
     {
-       
-        
-        [spinner startAnimating];
-        imageView.hidden = YES;
-        
-        [self.manga fetchImageAtIndex:index andPerformBlock:^(NSData *imageData) {
-            if(!imageData) return;
-            [self.imagesDictionnary setObject:[UIImage imageWithData:imageData] forKey:[self.manga.imageURLs objectAtIndex:index]];
-            [self.pageScrollView reloadPagesAtIndexes:[NSIndexSet indexSetWithIndex:index]];
-        }];
- 
-    }
-    else
-    {
-        [spinner stopAnimating];
-        imageView.image = image;
-        imageView.hidden = NO;
+        UIImageView * imageView = [[UIImageView alloc]initWithFrame:cell.bounds];
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
+        imageView.image = [UIImage imageWithData:imageData];
+        [cell addSubview:imageView];
+        [imageView release];
     }
     
     return cell;
     
 }
 
-- (NSInteger)numberOfPagesInScrollView:(HGPageScrollView *)scrollView
+- (void)readerView:(FBReaderView *)readerView willPresentViewAtIndex:(NSInteger)index
 {
-    return self.manga.imageURLs.count;
+    self.title = [NSString stringWithFormat:@"page %d / %d", index + 1, self.manga.imageURLs.count];
 }
-
-- (UIView *)pageScrollView:(HGPageScrollView *)scrollView headerViewForPageAtIndex:(NSInteger)index
-{
-    return nil;
-}
-
-- (NSString *)pageScrollView:(HGPageScrollView *)scrollView titleForPageAtIndex:(NSInteger)index
-{
-    return [NSString stringWithFormat:@"page %d", index];
-}
-
-
 @end
