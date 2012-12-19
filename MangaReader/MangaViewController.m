@@ -39,15 +39,13 @@
 
 - (void)viewDidLoad
 {
-    
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    
     self.view.backgroundColor = [UIColor blackColor];
     
-       // Ajout du reader
-    if(!self.readerView) self.readerView = [[FBReaderView alloc]initWithFrame:self.view.bounds];
+    // Ajout du reader
+    if(!self.readerView) self.readerView = [[[FBReaderView alloc]initWithFrame:self.view.bounds] autorelease];
     self.readerView.autoresizingMask = (UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth);
     self.readerView.dataSource = self;
     self.readerView.delegate = self;
@@ -63,7 +61,7 @@
     [self.view addGestureRecognizer:dbTap];
     [dbTap release];
     
-
+    
     if(!self.manga.imageURLs)
     {
         self.waitView.hidden = NO;
@@ -72,12 +70,44 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.waitView.hidden = YES;
                 [self.readerView reloadData];
+                [self startLoadingImages];
             });
             
         });
         
         
     }
+}
+
+- (NSURL *) urlForImageAtIndex:(NSInteger)index
+{
+    NSFileManager * fm = [[NSFileManager alloc]init];
+    NSURL * path = [[fm URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask] lastObject];
+    NSString * imageName = [NSString stringWithFormat:@"%@ - %d", self.manga.chapterTitle, index];
+    path = [path URLByAppendingPathComponent:imageName isDirectory:NO];
+    [fm release];
+    return path;
+    
+}
+- (void) startLoadingImages
+{
+    
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        for(int i = 0; i < self.manga.imageURLs.count; i++)
+        {
+            NSData * imageData = [NSData dataWithContentsOfURL:[self urlForImageAtIndex:i]];
+            if(!imageData)
+            {
+                [self.manga fetchImageAtIndex:i andPerformBlock:^(NSData *imageData) {
+                    [imageData writeToURL:[self urlForImageAtIndex:i] atomically:YES];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.readerView reloadViewAtIndex:i];
+                    });
+                }];
+            }
+            
+        }
+    });
 }
 
 #pragma mark - lazy getter
@@ -94,6 +124,7 @@
         spinner.autoresizingMask = (UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin);
         _waitView.autoresizingMask = (UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth);
         [_waitView addSubview:spinner];
+        [spinner release];
     }
     
     return _waitView;
@@ -108,7 +139,7 @@
 
 - (UIView *)readerView:(FBReaderView *)readerView viewAtIndex:(NSInteger)index
 {
-    UIView * cell = [[UIView alloc]initWithFrame:self.readerView.bounds];
+    UIView * cell = [[[UIView alloc]initWithFrame:self.readerView.bounds] autorelease];
     
     cell.backgroundColor = [UIColor blackColor];
     
@@ -118,15 +149,9 @@
     
     [cell addSubview:spinner];
     
-    NSFileManager * fileManager = [[NSFileManager alloc]init];
-    NSURL * pathURL = [[fileManager URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask] lastObject];
+    [spinner release];
     
-    
-    NSString * img = [NSString stringWithFormat:@"%@ - img%d.jpeg", self.manga.chapterTitle ,index];
-    
-    pathURL = [pathURL URLByAppendingPathComponent:img isDirectory:NO];
-    
-    NSData * imageData = [NSData dataWithContentsOfURL:pathURL];
+    NSData * imageData = [NSData dataWithContentsOfURL:[self urlForImageAtIndex:index]];
     
     if(imageData)
     {
@@ -134,18 +159,11 @@
         imageView.contentMode = UIViewContentModeScaleAspectFit;
         imageView.image = [UIImage imageWithData:imageData];
         [cell addSubview:imageView];
-    }
-    else
-    {
-        [self.manga fetchImageAtIndex:index andPerformBlock:^(NSData *imageData) {
-            if(imageData)
-                [imageData writeToURL:pathURL atomically:YES];
-            [self.readerView reloadViewAtIndex:index];
-        }];
+        [imageView release];
     }
     
     return cell;
-
+    
 }
 
 - (void)readerView:(FBReaderView *)readerView willPresentViewAtIndex:(NSInteger)index
