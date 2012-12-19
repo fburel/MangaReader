@@ -1,0 +1,12 @@
+
+*.xcworkspacedata
+
+*.xcuserstate
+
+*.xcsettings
+
+*.xcscheme
+
+*.plist
+
+MangaReader.xcodeproj/xcuserdata/fl0.xcuserdatad/xcschemes/MangaReader.xcscheme
