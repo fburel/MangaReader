@@ -105,6 +105,7 @@
                     });
                 }];
             }
+            else [self.readerView reloadViewAtIndex:i];
             
         }
     });
