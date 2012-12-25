@@ -25,20 +25,21 @@
 {
     [super viewDidLoad];
 
-    [self update];
-    
+    [self setPullDownToRefresh:YES];
+
 }
 
-- (void) update
+- (void) refresh
 {
-    
     [[UIApplication sharedApplication]setNetworkActivityIndicatorVisible:YES];
     [Manga fetchMangaListAndPerformBlock:^(NSSet *mangas) {
         NSSortDescriptor * sd = [NSSortDescriptor sortDescriptorWithKey:@"chapterNumber" ascending:NO];
         self.mangas = [mangas sortedArrayUsingDescriptors:[NSArray arrayWithObject:sd]];;
         [self.tableView reloadData];
         [[UIApplication sharedApplication]setNetworkActivityIndicatorVisible:NO];
+        [self endRefreshing];
     }];
+    
 }
 
 #pragma mark - Table view data source

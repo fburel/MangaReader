@@ -17,115 +17,181 @@ BOOL isLoading = NO;
 
 BOOL isDragging = NO;
 
-BOOL _pullDownToRefresh = NO;
+#define kPullToRefreshHeaderViewLabel       1234
+#define kPullToRefreshHeaderViewSpinner     1235
+#define kPullToRefreshHeaderViewImage       1236
 
-NSInteger _refreshHeaderHeight = 52.0;
-
-
-#pragma mark - getters & setters
+#pragma mark - enabling  / disabling
 
 - (BOOL) pullDownToRefresh
 {
-    return _pullDownToRefresh;
+    return [self.tableView viewWithTag:kPullToRefreshHeaderViewTag] != nil;
 }
 
 - (void) setPullDownToRefresh:(BOOL)pullDownToRefresh
 {
-    _pullDownToRefresh = pullDownToRefresh;
+    if(pullDownToRefresh && !self.pullDownToRefresh) [self.tableView addSubview:[self pullToRefreshHeaderView]];
+    else if(!pullDownToRefresh) [[self pullToRefreshHeaderView]removeFromSuperview];
 }
 
-- (NSInteger) refreshHeaderHeight
+
+#pragma mark - getters & setters
+
+- (UIView *) pullToRefreshHeaderView
 {
-    return _refreshHeaderHeight;
+    UIView * refreshHeaderView = [self.tableView viewWithTag:kPullToRefreshHeaderViewTag];
+    if(!refreshHeaderView)
+    {
+        refreshHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0 - kPullToRefreshHeaderHeight, 320, kPullToRefreshHeaderHeight)];
+        refreshHeaderView.backgroundColor = [UIColor clearColor];
+        refreshHeaderView.tag = kPullToRefreshHeaderViewTag;
+        
+        UILabel * refreshLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, kPullToRefreshHeaderHeight)];
+        refreshLabel.backgroundColor = [UIColor clearColor];
+        refreshLabel.font = [UIFont boldSystemFontOfSize:12.0];
+        refreshLabel.textAlignment = UITextAlignmentCenter;
+        refreshLabel.tag = kPullToRefreshHeaderViewLabel;
+        
+        UIImageView * refreshArrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"arrow.png"]];
+        refreshArrow.frame = CGRectMake(floorf((kPullToRefreshHeaderHeight - 27) / 2),
+                                        (floorf(kPullToRefreshHeaderHeight - 44) / 2),
+                                        27, 44);
+        refreshArrow.tag = kPullToRefreshHeaderViewImage;
+        
+        
+        UIActivityIndicatorView * refreshSpinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        refreshSpinner.frame = CGRectMake(floorf(floorf(kPullToRefreshHeaderHeight - 20) / 2), floorf((kPullToRefreshHeaderHeight - 20) / 2), 20, 20);
+        refreshSpinner.hidesWhenStopped = YES;
+        refreshSpinner.tag = kPullToRefreshHeaderViewSpinner;
+        
+        [refreshHeaderView addSubview:refreshLabel];
+        [refreshHeaderView addSubview:refreshArrow];
+        [refreshHeaderView addSubview:refreshSpinner];
+        
+        [refreshLabel release];
+        [refreshArrow release];
+        [refreshSpinner release];
+    }
+    return refreshHeaderView;
 }
 
-- (void) setRefreshHeaderHeight:(NSInteger)refreshHeaderHeight
+- (UILabel *) pullToRefreshLabel
 {
-    _refreshHeaderHeight = refreshHeaderHeight;
+    return (UILabel *)[[self pullToRefreshHeaderView]viewWithTag:kPullToRefreshHeaderViewLabel];
 }
 
+- (UIActivityIndicatorView *) pullToRefreshSpinner
+{
+    return (UIActivityIndicatorView *)[[self pullToRefreshHeaderView]viewWithTag:kPullToRefreshHeaderViewSpinner];
+
+}
+
+- (UIImageView *) pullToRefreshArrow
+{
+    return (UIImageView *)[[self pullToRefreshHeaderView]viewWithTag:kPullToRefreshHeaderViewImage];
+}
 
 #pragma mark - scrollViewDelegate methods (to detect the scrolling)
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView 
 {
-    if(!_pullDownToRefresh || isLoading) return;
+    if(isLoading) return;
     isDragging = YES;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if(!_pullDownToRefresh) return;
-   
+    
     if (isLoading) 
     {
         // Update the content inset, good for section headers
         if (scrollView.contentOffset.y > 0)
             self.tableView.contentInset = UIEdgeInsetsZero;
-        else if (scrollView.contentOffset.y >= -self.refreshHeaderHeight)
+        else if (scrollView.contentOffset.y >= -kPullToRefreshHeaderHeight)
             self.tableView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
     } 
     else if (isDragging && scrollView.contentOffset.y < 0) 
     {
-        if (scrollView.contentOffset.y < -self.refreshHeaderHeight)
-            [self setPullDownToRefreshText:self.textRelease];
-        else 
-            [self setPullDownToRefreshText:self.textPull];        
+        [UIView animateWithDuration:0.25 animations:^{
+            if (scrollView.contentOffset.y < -kPullToRefreshHeaderHeight) {
+                // User is scrolling above the header
+                [self setPullDownToRefreshText:self.textRelease];
+                [[self pullToRefreshArrow] layer].transform = CATransform3DMakeRotation(M_PI, 0, 0, 1);
+            } else {
+                // User is scrolling somewhere within the header
+                [self setPullDownToRefreshText:self.textPull];
+                [[self pullToRefreshArrow] layer].transform = CATransform3DMakeRotation(M_PI * 2, 0, 0, 1);
+            }
+        }];
+   
     }
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate 
 {
-    if(!_pullDownToRefresh || isLoading) return;
+    if(isLoading) return;
     isDragging = NO;
     
-    if (scrollView.contentOffset.y <= -self.refreshHeaderHeight)
+    if (scrollView.contentOffset.y <= -kPullToRefreshHeaderHeight)
     {
-        [self setPullDownToRefreshText:self.textPull];    
+           
         isLoading = YES;
+        [UIView animateWithDuration:0.3 animations:^{
+            self.tableView.contentInset = UIEdgeInsetsMake(kPullToRefreshHeaderHeight, 0, 0, 0);
+            [self setPullDownToRefreshText:self.textLoading];
+            [self pullToRefreshArrow].hidden = YES;
+            [[self pullToRefreshSpinner] startAnimating];
+        }];
         [self refresh]; 
     }
 }
 
-- (void) didFinishLoading 
+- (void) endRefreshing
 {
-      
     isLoading = NO;
-    [self setPullDownToRefreshText:self.textPull];
+    
+    [UIView animateWithDuration:0.3
+                     animations:^
+    {
+        self.tableView.contentInset = UIEdgeInsetsZero;
+        [[self pullToRefreshArrow] layer].transform = CATransform3DMakeRotation(M_PI * 2, 0, 0, 1);
+    }
+                     completion:^(BOOL finished)
+    {
+                         [self setPullDownToRefreshText:self.textPull];
+                         [[self pullToRefreshArrow]setHidden:NO];
+                         [[self pullToRefreshSpinner]stopAnimating];
+    }];
 }
 
-#pragma mark - Override those methods in you tableViewController
-
-// Code to update the content of the tableView
-// You are responsible for sending  the did finish loading message to self at the proper time.
 - (void)refresh 
 {
-    [self didFinishLoading];
+    [self endRefreshing];
 
 }
 
-// Override this methods if you wich to inform the user about the different state of the process.
-// The text received will be self.textPull, self.textRelease or self.textLoading
+
+#pragma mark - Text value changing management
+
 - (void) setPullDownToRefreshText:(NSString *)text
 {
-    self.title = text;
+    [[self pullToRefreshLabel]setText:text];
 }
 
-// You can override the NSString méthods with your custom text - this is the text of the normal state
+#pragma mark - default value for the Strings
+
 - (NSString *) textPull
 {
-    return nil;
+    return NSLocalizedString(@"Pull down to refresh", nil);
 }
 
-// You can override the NSString méthods with your custom text - this is displayed while user is dragging lower than the header
 - (NSString *) textRelease
 {
-    return nil;
+    return NSLocalizedString(@"Release to refresh", nil);
 }
 
-// You can override the NSString méthods with your custom text - this is the text displayed while the data are loading
 - (NSString *) textLoading
 {
-    return nil;
+    return NSLocalizedString(@"Please wait...", nil);
 }
 
 

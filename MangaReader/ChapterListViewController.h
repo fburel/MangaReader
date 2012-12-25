@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Manga.h"
 #import "MangaViewController.h"
+#import "UITableViewController+PullDownToRefresh.h"
 
 @interface ChapterListViewController : UITableViewController
 

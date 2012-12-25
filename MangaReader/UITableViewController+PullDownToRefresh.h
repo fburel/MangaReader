@@ -36,23 +36,33 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
+
+// The tag number that will be given to the tableView header
+// It is critical that no other view inside the tableView share this number
+#define kPullToRefreshHeaderViewTag             40810
+
+// The size for the headerView
+#define kPullToRefreshHeaderHeight              52
 
 @interface UITableViewController (PullDownToRefresh)
 
+
+// The methods to overide :-)
 - (void)refresh;
 
-- (void) didFinishLoading;
+// You can call this methods once your done with your update method
+- (void) endRefreshing;
 
-- (void) setPullDownToRefreshText:(NSString *)text;
-
+// Overide those getters with your custom text for the "pull to refresh", "release to refresh" and "refreshing" NSStrings
 @property (readonly) NSString * textPull;
 
 @property (readonly) NSString * textRelease;
 
 @property (readonly) NSString * textLoading;
 
+// Setting this value to YES or NO will add the header View to your code
 @property (assign, nonatomic) BOOL pullDownToRefresh;
 
-@property (assign, nonatomic) NSInteger refreshHeaderHeight; 
 
 @end

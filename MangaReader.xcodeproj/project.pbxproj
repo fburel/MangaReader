@@ -119,19 +119,22 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
-		0C98D1841687607E003B0D1D /* New Group */ = {
+		0C98D1841687607E003B0D1D /* PullToRefresh */ = {
 			isa = PBXGroup;
 			children = (
 				0C7A35331689FB1500FFF5B1 /* UITableViewController+PullDownToRefresh.h */,
 				0C7A35341689FB1500FFF5B1 /* UITableViewController+PullDownToRefresh.m */,
 				0C98D1851687609C003B0D1D /* arrow.png */,
 			);
-			name = "New Group";
+			name = PullToRefresh;
+			path = MangaReader;
 			sourceTree = "<group>";
 		};
 		0CBAB2201679384F00EA2E3C = {
 			isa = PBXGroup;
 			children = (
+				0CBAB270167A5F6C00EA2E3C /* TFHpple */,
+				0C98D1841687607E003B0D1D /* PullToRefresh */,
 				0CBAB2351679384F00EA2E3C /* MangaReader */,
 				0CBAB22E1679384F00EA2E3C /* Frameworks */,
 				0CBAB22C1679384F00EA2E3C /* Products */,
@@ -168,7 +171,6 @@
 				0CBAB23F1679384F00EA2E3C /* AppDelegate.m */,
 				0CBAB23E1679384F00EA2E3C /* AppDelegate.h */,
 				0CBAB2361679384F00EA2E3C /* Supporting Files */,
-				0C98D1841687607E003B0D1D /* New Group */,
 			);
 			path = MangaReader;
 			sourceTree = "<group>";
@@ -198,12 +200,12 @@
 				0CBAB26C167A5F6500EA2E3C /* XPathQuery.m */,
 			);
 			name = TFHpple;
+			path = MangaReader;
 			sourceTree = "<group>";
 		};
 		0CBAB2D7167CA1BC00EA2E3C /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				0CBAB270167A5F6C00EA2E3C /* TFHpple */,
 				0CBAB24C167938A600EA2E3C /* MangaReaderFetcher.h */,
 				0CBAB24D167938A600EA2E3C /* MangaReaderFetcher.m */,
 			);
