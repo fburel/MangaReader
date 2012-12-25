@@ -71,6 +71,8 @@ BOOL isDragging = NO;
         [refreshLabel release];
         [refreshArrow release];
         [refreshSpinner release];
+        
+        [refreshHeaderView autorelease];
     }
     return refreshHeaderView;
 }
