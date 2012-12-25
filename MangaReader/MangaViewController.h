@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Manga.h"
 #import "FBReaderView.h"
+#import "FBZoomableImageView.h"
 
 @interface MangaViewController : UIViewController
 <FBReaderViewDatasource, FBReaderViewDelegate>

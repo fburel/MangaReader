@@ -56,10 +56,10 @@
     
     
     // Affichage des bar de nav sur dblClick
-    UITapGestureRecognizer * dbTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(toogleBarVisibility)];
-    dbTap.numberOfTapsRequired = 2;
-    [self.view addGestureRecognizer:dbTap];
-    [dbTap release];
+//    UITapGestureRecognizer * dbTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(toogleBarVisibility)];
+//    [self.view addGestureRecognizer:dbTap];
+//    dbTap.numberOfTapsRequired = 1;
+//    [dbTap release];
     
     
     if(!self.manga.imageURLs)
@@ -155,7 +155,7 @@
     
     if(imageData)
     {
-        UIImageView * imageView = [[UIImageView alloc]initWithFrame:cell.bounds];
+        FBZoomableImageView * imageView = [[FBZoomableImageView alloc]initWithFrame:cell.bounds];
         imageView.contentMode = UIViewContentModeScaleAspectFit;
         imageView.image = [UIImage imageWithData:imageData];
         [cell addSubview:imageView];
