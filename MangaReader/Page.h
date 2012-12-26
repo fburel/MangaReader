@@ -9,12 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+@class Chapter;
 
 @interface Page : NSManagedObject
 
 @property (nonatomic, retain) NSNumber * number;
 @property (nonatomic, retain) NSString * serverURL;
-@property (nonatomic, retain) NSString * localURL;
-@property (nonatomic, retain) NSManagedObject *chapter;
+@property (nonatomic, retain) NSNumber * isDownloaded;
+@property (nonatomic, retain) Chapter *chapter;
 
 @end

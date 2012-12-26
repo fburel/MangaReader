@@ -9,18 +9,20 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+@class Chapter;
 
 @interface Manga : NSManagedObject
 
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSString * mainURL;
+@property (nonatomic, retain) NSNumber * favourite;
 @property (nonatomic, retain) NSSet *chapters;
 @end
 
 @interface Manga (CoreDataGeneratedAccessors)
 
-- (void)addChaptersObject:(NSManagedObject *)value;
-- (void)removeChaptersObject:(NSManagedObject *)value;
+- (void)addChaptersObject:(Chapter *)value;
+- (void)removeChaptersObject:(Chapter *)value;
 - (void)addChapters:(NSSet *)values;
 - (void)removeChapters:(NSSet *)values;
 

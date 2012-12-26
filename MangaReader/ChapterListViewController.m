@@ -91,6 +91,11 @@
     
     cell.detailTextLabel.text = chapter.subtitle;
     
+    UIImage * image = chapter.downloaded.boolValue ?
+    [UIImage imageNamed:@"12-eye"] : [UIImage imageNamed:@"40-inbox"];
+    
+    cell.accessoryView = [[[UIImageView alloc]initWithImage:image] autorelease];
+    
     return cell;
 }
 

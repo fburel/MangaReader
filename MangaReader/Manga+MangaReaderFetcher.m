@@ -39,6 +39,8 @@
                 }
             }];
             
+            [self.managedObjectContext save:nil];
+            
             if(completion) completion();
         });
     });

@@ -16,6 +16,7 @@
 @dynamic number;
 @dynamic subtitle;
 @dynamic url;
+@dynamic downloaded;
 @dynamic pages;
 @dynamic manga;
 

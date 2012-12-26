@@ -12,13 +12,15 @@
 		0C7A35351689FB1500FFF5B1 /* UITableViewController+PullDownToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7A35341689FB1500FFF5B1 /* UITableViewController+PullDownToRefresh.m */; };
 		0C98D195168B2A1E003B0D1D /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C98D194168B2A1E003B0D1D /* arrow.png */; };
 		0C98D198168B2D07003B0D1D /* MangaReader.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0C98D196168B2D07003B0D1D /* MangaReader.xcdatamodeld */; };
-		0C98D19D168B2FA0003B0D1D /* Page.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C98D19C168B2FA0003B0D1D /* Page.m */; };
-		0C98D1A0168B2FA1003B0D1D /* Manga.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C98D19F168B2FA1003B0D1D /* Manga.m */; };
 		0C98D1A9168B3B7E003B0D1D /* Chapter+MangaReaderFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C98D1A8168B3B7E003B0D1D /* Chapter+MangaReaderFetcher.m */; };
-		0C98D1AC168B3E0F003B0D1D /* Chapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C98D1AB168B3E0F003B0D1D /* Chapter.m */; };
 		0C98D1AF168B42D9003B0D1D /* Manga+MangaReaderFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C98D1AE168B42D9003B0D1D /* Manga+MangaReaderFetcher.m */; };
 		0C98D1B2168B4D46003B0D1D /* Page+ImageFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C98D1B1168B4D46003B0D1D /* Page+ImageFetcher.m */; };
 		0C98D1B4168B6266003B0D1D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C98D1B3168B6266003B0D1D /* CoreData.framework */; };
+		0C98D1B7168B71CE003B0D1D /* 12-eye.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C98D1B5168B71CD003B0D1D /* 12-eye.png */; };
+		0C98D1B8168B71CE003B0D1D /* 40-inbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C98D1B6168B71CD003B0D1D /* 40-inbox.png */; };
+		0C98D1BB168B72F4003B0D1D /* Chapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C98D1BA168B72F4003B0D1D /* Chapter.m */; };
+		0C98D1BE168B72F4003B0D1D /* Manga.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C98D1BD168B72F4003B0D1D /* Manga.m */; };
+		0C98D1C4168B7501003B0D1D /* Page.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C98D1C3168B7501003B0D1D /* Page.m */; };
 		0CADFB71167CB306001B4490 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CADFB70167CB306001B4490 /* QuartzCore.framework */; };
 		0CBAB2301679384F00EA2E3C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CBAB22F1679384F00EA2E3C /* UIKit.framework */; };
 		0CBAB2321679384F00EA2E3C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CBAB2311679384F00EA2E3C /* Foundation.framework */; };
@@ -47,19 +49,21 @@
 		0C7A35341689FB1500FFF5B1 /* UITableViewController+PullDownToRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewController+PullDownToRefresh.m"; sourceTree = "<group>"; };
 		0C98D194168B2A1E003B0D1D /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
 		0C98D197168B2D07003B0D1D /* MangaReader.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MangaReader.xcdatamodel; sourceTree = "<group>"; };
-		0C98D19B168B2FA0003B0D1D /* Page.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Page.h; sourceTree = "<group>"; };
-		0C98D19C168B2FA0003B0D1D /* Page.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Page.m; sourceTree = "<group>"; };
-		0C98D19E168B2FA1003B0D1D /* Manga.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Manga.h; sourceTree = "<group>"; };
-		0C98D19F168B2FA1003B0D1D /* Manga.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Manga.m; sourceTree = "<group>"; };
 		0C98D1A7168B3B7E003B0D1D /* Chapter+MangaReaderFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Chapter+MangaReaderFetcher.h"; sourceTree = "<group>"; };
 		0C98D1A8168B3B7E003B0D1D /* Chapter+MangaReaderFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Chapter+MangaReaderFetcher.m"; sourceTree = "<group>"; };
-		0C98D1AA168B3E0F003B0D1D /* Chapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chapter.h; sourceTree = "<group>"; };
-		0C98D1AB168B3E0F003B0D1D /* Chapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chapter.m; sourceTree = "<group>"; };
 		0C98D1AD168B42D9003B0D1D /* Manga+MangaReaderFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Manga+MangaReaderFetcher.h"; sourceTree = "<group>"; };
 		0C98D1AE168B42D9003B0D1D /* Manga+MangaReaderFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Manga+MangaReaderFetcher.m"; sourceTree = "<group>"; };
 		0C98D1B0168B4D46003B0D1D /* Page+ImageFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Page+ImageFetcher.h"; sourceTree = "<group>"; };
 		0C98D1B1168B4D46003B0D1D /* Page+ImageFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Page+ImageFetcher.m"; sourceTree = "<group>"; };
 		0C98D1B3168B6266003B0D1D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		0C98D1B5168B71CD003B0D1D /* 12-eye.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "12-eye.png"; path = "../12-eye.png"; sourceTree = "<group>"; };
+		0C98D1B6168B71CD003B0D1D /* 40-inbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "40-inbox.png"; path = "../40-inbox.png"; sourceTree = "<group>"; };
+		0C98D1B9168B72F3003B0D1D /* Chapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chapter.h; sourceTree = "<group>"; };
+		0C98D1BA168B72F4003B0D1D /* Chapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chapter.m; sourceTree = "<group>"; };
+		0C98D1BC168B72F4003B0D1D /* Manga.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Manga.h; sourceTree = "<group>"; };
+		0C98D1BD168B72F4003B0D1D /* Manga.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Manga.m; sourceTree = "<group>"; };
+		0C98D1C2168B7501003B0D1D /* Page.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Page.h; sourceTree = "<group>"; };
+		0C98D1C3168B7501003B0D1D /* Page.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Page.m; sourceTree = "<group>"; };
 		0CADFB70167CB306001B4490 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0CBAB22B1679384F00EA2E3C /* MangaReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MangaReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CBAB22F1679384F00EA2E3C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -215,6 +219,8 @@
 				0CBAB2371679384F00EA2E3C /* MangaReader-Info.plist */,
 				0CBAB2381679384F00EA2E3C /* InfoPlist.strings */,
 				0CBAB23B1679384F00EA2E3C /* main.m */,
+				0C98D1B5168B71CD003B0D1D /* 12-eye.png */,
+				0C98D1B6168B71CD003B0D1D /* 40-inbox.png */,
 				0CBAB23D1679384F00EA2E3C /* MangaReader-Prefix.pch */,
 				0CBAB2411679384F00EA2E3C /* Default.png */,
 				0CBAB2431679384F00EA2E3C /* Default@2x.png */,
@@ -256,12 +262,12 @@
 			isa = PBXGroup;
 			children = (
 				0C98D196168B2D07003B0D1D /* MangaReader.xcdatamodeld */,
-				0C98D19E168B2FA1003B0D1D /* Manga.h */,
-				0C98D19F168B2FA1003B0D1D /* Manga.m */,
-				0C98D1AA168B3E0F003B0D1D /* Chapter.h */,
-				0C98D1AB168B3E0F003B0D1D /* Chapter.m */,
-				0C98D19B168B2FA0003B0D1D /* Page.h */,
-				0C98D19C168B2FA0003B0D1D /* Page.m */,
+				0C98D1BC168B72F4003B0D1D /* Manga.h */,
+				0C98D1BD168B72F4003B0D1D /* Manga.m */,
+				0C98D1B9168B72F3003B0D1D /* Chapter.h */,
+				0C98D1BA168B72F4003B0D1D /* Chapter.m */,
+				0C98D1C2168B7501003B0D1D /* Page.h */,
+				0C98D1C3168B7501003B0D1D /* Page.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -322,6 +328,8 @@
 				0CBAB2441679384F00EA2E3C /* Default@2x.png in Resources */,
 				0CBAB2461679384F00EA2E3C /* Default-568h@2x.png in Resources */,
 				0C98D195168B2A1E003B0D1D /* arrow.png in Resources */,
+				0C98D1B7168B71CE003B0D1D /* 12-eye.png in Resources */,
+				0C98D1B8168B71CE003B0D1D /* 40-inbox.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,12 +352,12 @@
 				0C7A35351689FB1500FFF5B1 /* UITableViewController+PullDownToRefresh.m in Sources */,
 				0C318762168A7E9E000341C0 /* TapDetectingImageView.m in Sources */,
 				0C98D198168B2D07003B0D1D /* MangaReader.xcdatamodeld in Sources */,
-				0C98D19D168B2FA0003B0D1D /* Page.m in Sources */,
-				0C98D1A0168B2FA1003B0D1D /* Manga.m in Sources */,
 				0C98D1A9168B3B7E003B0D1D /* Chapter+MangaReaderFetcher.m in Sources */,
-				0C98D1AC168B3E0F003B0D1D /* Chapter.m in Sources */,
 				0C98D1AF168B42D9003B0D1D /* Manga+MangaReaderFetcher.m in Sources */,
 				0C98D1B2168B4D46003B0D1D /* Page+ImageFetcher.m in Sources */,
+				0C98D1BB168B72F4003B0D1D /* Chapter.m in Sources */,
+				0C98D1BE168B72F4003B0D1D /* Manga.m in Sources */,
+				0C98D1C4168B7501003B0D1D /* Page.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

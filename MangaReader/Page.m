@@ -7,13 +7,14 @@
 //
 
 #import "Page.h"
+#import "Chapter.h"
 
 
 @implementation Page
 
 @dynamic number;
 @dynamic serverURL;
-@dynamic localURL;
+@dynamic isDownloaded;
 @dynamic chapter;
 
 @end

@@ -21,9 +21,9 @@
                     Page * page = [NSEntityDescription insertNewObjectForEntityForName:@"Page" inManagedObjectContext:self.managedObjectContext];
                     page.number = [NSNumber numberWithInteger:idx];
                     page.serverURL = obj;
-                    page.localURL = nil;
                     page.chapter = self;
                 }];
+                [self.managedObjectContext save:nil];
                 if(completion)completion();
             });
         });

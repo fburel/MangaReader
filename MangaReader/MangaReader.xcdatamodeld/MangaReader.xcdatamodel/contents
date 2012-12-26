@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1811" systemVersion="12C60" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Chapter" representedClassName="Chapter" syncable="YES">
+        <attribute name="downloaded" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="number" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="subtitle" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
@@ -8,19 +9,20 @@
         <relationship name="pages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Page" inverseName="chapter" inverseEntity="Page" syncable="YES"/>
     </entity>
     <entity name="Manga" representedClassName="Manga" syncable="YES">
+        <attribute name="favourite" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="mainURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="chapters" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Chapter" inverseName="manga" inverseEntity="Chapter" syncable="YES"/>
     </entity>
     <entity name="Page" representedClassName="Page" syncable="YES">
-        <attribute name="localURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isDownloaded" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="number" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="serverURL" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="chapter" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Chapter" inverseName="pages" inverseEntity="Chapter" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Manga" positionX="-180" positionY="162" width="128" height="88"/>
-        <element name="Chapter" positionX="43" positionY="255" width="128" height="118"/>
+        <element name="Manga" positionX="-180" positionY="162" width="128" height="103"/>
+        <element name="Chapter" positionX="43" positionY="255" width="128" height="133"/>
         <element name="Page" positionX="286" positionY="336" width="128" height="103"/>
     </elements>
 </model>

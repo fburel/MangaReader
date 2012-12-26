@@ -7,12 +7,14 @@
 //
 
 #import "Manga.h"
+#import "Chapter.h"
 
 
 @implementation Manga
 
 @dynamic title;
 @dynamic mainURL;
+@dynamic favourite;
 @dynamic chapters;
 
 @end
