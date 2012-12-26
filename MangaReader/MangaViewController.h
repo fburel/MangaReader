@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "Chapter+MangaReaderFetcher.h"
-#import "Page+ImageFetcher.h"
 #import "FBReaderView.h"
 #import "TapDetectingImageView.h"
 

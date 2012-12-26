@@ -8,6 +8,13 @@
 
 #import "MangaViewController.h"
 
+
+@interface Page (ImageFetcher)
+
+- (void) fetchImageData:(void(^)(NSData * imageData))completion;
+
+@end
+
 @interface MangaViewController ()
 @property (nonatomic, retain) UIView * waitView;
 @property (nonatomic, retain) IBOutlet FBReaderView * readerView;
@@ -267,3 +274,20 @@
 
 
 @end
+
+
+
+@implementation Page (ImageFetcher)
+
+- (void)fetchImageData:(void (^)(NSData *))completion
+{
+    dispatch_async(dispatch_get_global_queue(2, 0), ^{
+        NSData * imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:self.serverURL]];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completion(imageData);
+        });
+    });
+}
+@end
+
+
