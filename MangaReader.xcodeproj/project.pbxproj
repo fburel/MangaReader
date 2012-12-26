@@ -26,6 +26,7 @@
 		0CBAB272167A5FC100EA2E3C /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CBAB271167A5FC100EA2E3C /* libxml2.dylib */; };
 		0CBAB275167A6CEE00EA2E3C /* ChapterListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CBAB274167A6CEE00EA2E3C /* ChapterListViewController.m */; };
 		0CBAB2B0167A717900EA2E3C /* MangaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CBAB2AF167A717900EA2E3C /* MangaViewController.m */; };
+		0CC3FF53168A60A100C0CA94 /* TapDetectingImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CC3FF52168A60A100C0CA94 /* TapDetectingImageView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,8 @@
 		0CBAB274167A6CEE00EA2E3C /* ChapterListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChapterListViewController.m; sourceTree = "<group>"; };
 		0CBAB2AE167A717900EA2E3C /* MangaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MangaViewController.h; path = MangaReader/MangaViewController.h; sourceTree = SOURCE_ROOT; };
 		0CBAB2AF167A717900EA2E3C /* MangaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MangaViewController.m; path = MangaReader/MangaViewController.m; sourceTree = SOURCE_ROOT; };
+		0CC3FF51168A60A100C0CA94 /* TapDetectingImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapDetectingImageView.h; sourceTree = "<group>"; };
+		0CC3FF52168A60A100C0CA94 /* TapDetectingImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TapDetectingImageView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,9 +117,20 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		0C7A3546168A0F3200FFF5B1 /* FBZoomableImageView */ = {
+			isa = PBXGroup;
+			children = (
+				0CC3FF51168A60A100C0CA94 /* TapDetectingImageView.h */,
+				0CC3FF52168A60A100C0CA94 /* TapDetectingImageView.m */,
+			);
+			name = FBZoomableImageView;
+			path = MangaReader;
+			sourceTree = "<group>";
+		};
 		0CBAB2201679384F00EA2E3C = {
 			isa = PBXGroup;
 			children = (
+				0C7A3546168A0F3200FFF5B1 /* FBZoomableImageView */,
 				0CBAB2351679384F00EA2E3C /* MangaReader */,
 				0CBAB22E1679384F00EA2E3C /* Frameworks */,
 				0CBAB22C1679384F00EA2E3C /* Products */,
@@ -278,6 +292,7 @@
 				0CBAB275167A6CEE00EA2E3C /* ChapterListViewController.m in Sources */,
 				0CBAB2B0167A717900EA2E3C /* MangaViewController.m in Sources */,
 				0C72C207167E5226000A553A /* FBReaderView.m in Sources */,
+				0CC3FF53168A60A100C0CA94 /* TapDetectingImageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
