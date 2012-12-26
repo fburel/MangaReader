@@ -123,13 +123,17 @@
 			sourceTree = "<group>";
 		};
 		0C98D1841687607E003B0D1D /* PullToRefresh */ = {
+		0C7A3546168A0F3200FFF5B1 /* FBZoomableImageView */ = {
 			isa = PBXGroup;
 			children = (
 				0C7A35331689FB1500FFF5B1 /* UITableViewController+PullDownToRefresh.h */,
 				0C7A35341689FB1500FFF5B1 /* UITableViewController+PullDownToRefresh.m */,
 				0C98D1851687609C003B0D1D /* arrow.png */,
+				0CC3FF51168A60A100C0CA94 /* TapDetectingImageView.h */,
+				0CC3FF52168A60A100C0CA94 /* TapDetectingImageView.m */,
 			);
 			name = PullToRefresh;
+			name = FBZoomableImageView;
 			path = MangaReader;
 			sourceTree = "<group>";
 		};
@@ -138,6 +142,7 @@
 			children = (
 				0CBAB270167A5F6C00EA2E3C /* TFHpple */,
 				0C98D1841687607E003B0D1D /* PullToRefresh */,
+				0C7A3546168A0F3200FFF5B1 /* FBZoomableImageView */,
 				0CBAB2351679384F00EA2E3C /* MangaReader */,
 				0CBAB22E1679384F00EA2E3C /* Frameworks */,
 				0CBAB22C1679384F00EA2E3C /* Products */,
@@ -301,6 +306,7 @@
 				0CBAB2B0167A717900EA2E3C /* MangaViewController.m in Sources */,
 				0C72C207167E5226000A553A /* FBReaderView.m in Sources */,
 				0C7A35351689FB1500FFF5B1 /* UITableViewController+PullDownToRefresh.m in Sources */,
+				0CC3FF53168A60A100C0CA94 /* TapDetectingImageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
