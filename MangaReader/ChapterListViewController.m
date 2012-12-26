@@ -91,7 +91,7 @@
     
     cell.detailTextLabel.text = chapter.subtitle;
     
-    UIImage * image = chapter.downloaded.boolValue ?
+    UIImage * image = [chapter downloadedRate] == 1 ?
     [UIImage imageNamed:@"12-eye"] : [UIImage imageNamed:@"40-inbox"];
     
     cell.accessoryView = [[[UIImageView alloc]initWithImage:image] autorelease];

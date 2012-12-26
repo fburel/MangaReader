@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Manga+MangaReaderFetcher.h"
 #import "Chapter+MangaReaderFetcher.h"
+#import "Chapter+DownloadedRate.h"
 #import "MangaViewController.h"
 #import "UITableViewController+PullDownToRefresh.h"
 

@@ -16,9 +16,8 @@
 @property (nonatomic, retain) NSNumber * number;
 @property (nonatomic, retain) NSString * subtitle;
 @property (nonatomic, retain) NSString * url;
-@property (nonatomic, retain) NSNumber * downloaded;
-@property (nonatomic, retain) NSSet *pages;
 @property (nonatomic, retain) Manga *manga;
+@property (nonatomic, retain) NSSet *pages;
 @end
 
 @interface Chapter (CoreDataGeneratedAccessors)

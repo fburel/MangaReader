@@ -1,5 +1,5 @@
 //
-//  Chapter.m
+//  Chapter+DownloadedRate.h
 //  MangaReader
 //
 //  Created by florian BUREL on 26/12/12.
@@ -7,16 +7,10 @@
 //
 
 #import "Chapter.h"
-#import "Manga.h"
 #import "Page.h"
 
+@interface Chapter (DownloadedRate)
 
-@implementation Chapter
-
-@dynamic number;
-@dynamic subtitle;
-@dynamic url;
-@dynamic manga;
-@dynamic pages;
+- (float) downloadedRate;
 
 @end

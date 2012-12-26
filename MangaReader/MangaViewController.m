@@ -84,9 +84,7 @@
 }
 - (void) startLoadingImages
 {
-    
-    if(self.chapter.downloaded.boolValue == YES) return;
-    
+
     [self.chapter.pages enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
         Page * page = (Page *) obj;
         int i = page.number.intValue;
@@ -101,16 +99,6 @@
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self.readerView reloadViewAtIndex:i];
                     page.isDownloaded = [NSNumber numberWithBool:YES];
-                    
-                    // le manga est- il telecharger?
-                    NSSet * notDownloaded = [self.chapter.pages objectsPassingTest:^BOOL(id obj, BOOL *stop) {
-                        *stop = ![obj isDownloaded];
-                        return *stop;
-                    }];
-                    
-                    if(!notDownloaded.count)
-                        self.chapter.downloaded = [NSNumber numberWithBool:YES];
-                    
                 });
             }];
         }
