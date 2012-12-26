@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C318762168A7E9E000341C0 /* TapDetectingImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C318761168A7E9E000341C0 /* TapDetectingImageView.m */; };
 		0C72C207167E5226000A553A /* FBReaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C72C206167E5226000A553A /* FBReaderView.m */; };
 		0C7A35351689FB1500FFF5B1 /* UITableViewController+PullDownToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7A35341689FB1500FFF5B1 /* UITableViewController+PullDownToRefresh.m */; };
 		0C98D1861687609C003B0D1D /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C98D1851687609C003B0D1D /* arrow.png */; };
@@ -28,10 +29,11 @@
 		0CBAB272167A5FC100EA2E3C /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CBAB271167A5FC100EA2E3C /* libxml2.dylib */; };
 		0CBAB275167A6CEE00EA2E3C /* ChapterListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CBAB274167A6CEE00EA2E3C /* ChapterListViewController.m */; };
 		0CBAB2B0167A717900EA2E3C /* MangaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CBAB2AF167A717900EA2E3C /* MangaViewController.m */; };
-		0CC3FF53168A60A100C0CA94 /* TapDetectingImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CC3FF52168A60A100C0CA94 /* TapDetectingImageView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C318760168A7E9E000341C0 /* TapDetectingImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TapDetectingImageView.h; path = MangaReader/TapDetectingImageView.h; sourceTree = "<group>"; };
+		0C318761168A7E9E000341C0 /* TapDetectingImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TapDetectingImageView.m; path = MangaReader/TapDetectingImageView.m; sourceTree = "<group>"; };
 		0C72C205167E5226000A553A /* FBReaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBReaderView.h; sourceTree = "<group>"; };
 		0C72C206167E5226000A553A /* FBReaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBReaderView.m; sourceTree = "<group>"; };
 		0C7A35331689FB1500FFF5B1 /* UITableViewController+PullDownToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewController+PullDownToRefresh.h"; sourceTree = "<group>"; };
@@ -66,8 +68,6 @@
 		0CBAB274167A6CEE00EA2E3C /* ChapterListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChapterListViewController.m; sourceTree = "<group>"; };
 		0CBAB2AE167A717900EA2E3C /* MangaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MangaViewController.h; path = MangaReader/MangaViewController.h; sourceTree = SOURCE_ROOT; };
 		0CBAB2AF167A717900EA2E3C /* MangaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MangaViewController.m; path = MangaReader/MangaViewController.m; sourceTree = SOURCE_ROOT; };
-		0CC3FF51168A60A100C0CA94 /* TapDetectingImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapDetectingImageView.h; sourceTree = "<group>"; };
-		0CC3FF52168A60A100C0CA94 /* TapDetectingImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TapDetectingImageView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +86,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C318764168A7EA6000341C0 /* TapDetectingImageView */ = {
+			isa = PBXGroup;
+			children = (
+				0C318760168A7E9E000341C0 /* TapDetectingImageView.h */,
+				0C318761168A7E9E000341C0 /* TapDetectingImageView.m */,
+			);
+			name = TapDetectingImageView;
+			sourceTree = "<group>";
+		};
 		0C72C201167E4E8C000A553A /* ChapterList */ = {
 			isa = PBXGroup;
 			children = (
@@ -123,26 +132,22 @@
 			sourceTree = "<group>";
 		};
 		0C98D1841687607E003B0D1D /* PullToRefresh */ = {
-		0C7A3546168A0F3200FFF5B1 /* FBZoomableImageView */ = {
 			isa = PBXGroup;
 			children = (
 				0C7A35331689FB1500FFF5B1 /* UITableViewController+PullDownToRefresh.h */,
 				0C7A35341689FB1500FFF5B1 /* UITableViewController+PullDownToRefresh.m */,
 				0C98D1851687609C003B0D1D /* arrow.png */,
-				0CC3FF51168A60A100C0CA94 /* TapDetectingImageView.h */,
-				0CC3FF52168A60A100C0CA94 /* TapDetectingImageView.m */,
 			);
 			name = PullToRefresh;
-			name = FBZoomableImageView;
 			path = MangaReader;
 			sourceTree = "<group>";
 		};
 		0CBAB2201679384F00EA2E3C = {
 			isa = PBXGroup;
 			children = (
+				0C318764168A7EA6000341C0 /* TapDetectingImageView */,
 				0CBAB270167A5F6C00EA2E3C /* TFHpple */,
 				0C98D1841687607E003B0D1D /* PullToRefresh */,
-				0C7A3546168A0F3200FFF5B1 /* FBZoomableImageView */,
 				0CBAB2351679384F00EA2E3C /* MangaReader */,
 				0CBAB22E1679384F00EA2E3C /* Frameworks */,
 				0CBAB22C1679384F00EA2E3C /* Products */,
@@ -306,7 +311,7 @@
 				0CBAB2B0167A717900EA2E3C /* MangaViewController.m in Sources */,
 				0C72C207167E5226000A553A /* FBReaderView.m in Sources */,
 				0C7A35351689FB1500FFF5B1 /* UITableViewController+PullDownToRefresh.m in Sources */,
-				0CC3FF53168A60A100C0CA94 /* TapDetectingImageView.m in Sources */,
+				0C318762168A7E9E000341C0 /* TapDetectingImageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
