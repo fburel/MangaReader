@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "Manga.h"
 #import "FBReaderView.h"
-#import "FBZoomableImageView.h"
+#import "TapDetectingImageView.h"
 
 @interface MangaViewController : UIViewController
-<FBReaderViewDatasource, FBReaderViewDelegate>
+<FBReaderViewDatasource, FBReaderViewDelegate, TapDetectingImageViewDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, retain) Manga * manga;
 
