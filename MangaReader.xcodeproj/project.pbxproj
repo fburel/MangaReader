@@ -28,6 +28,7 @@
 		0CBAB272167A5FC100EA2E3C /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CBAB271167A5FC100EA2E3C /* libxml2.dylib */; };
 		0CBAB275167A6CEE00EA2E3C /* ChapterListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CBAB274167A6CEE00EA2E3C /* ChapterListViewController.m */; };
 		0CBAB2B0167A717900EA2E3C /* MangaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CBAB2AF167A717900EA2E3C /* MangaViewController.m */; };
+		0CC3FF53168A60A100C0CA94 /* TapDetectingImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CC3FF52168A60A100C0CA94 /* TapDetectingImageView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +66,8 @@
 		0CBAB274167A6CEE00EA2E3C /* ChapterListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChapterListViewController.m; sourceTree = "<group>"; };
 		0CBAB2AE167A717900EA2E3C /* MangaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MangaViewController.h; path = MangaReader/MangaViewController.h; sourceTree = SOURCE_ROOT; };
 		0CBAB2AF167A717900EA2E3C /* MangaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MangaViewController.m; path = MangaReader/MangaViewController.m; sourceTree = SOURCE_ROOT; };
+		0CC3FF51168A60A100C0CA94 /* TapDetectingImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapDetectingImageView.h; sourceTree = "<group>"; };
+		0CC3FF52168A60A100C0CA94 /* TapDetectingImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TapDetectingImageView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
