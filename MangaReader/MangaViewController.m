@@ -15,7 +15,7 @@
 
 @implementation MangaViewController
 
-@synthesize manga = _manga;
+@synthesize chapter = _chapter;
 @synthesize waitView = _waitView;
 @synthesize readerView = _readerView;
 
@@ -25,7 +25,7 @@
 
 -(void)dealloc
 {
-    [_manga release];
+    [_chapter release];
     [_waitView release];
     [_readerView release];
     [super dealloc];
@@ -42,6 +42,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    self.title = self.chapter.subtitle;
     self.view.backgroundColor = [UIColor blackColor];
     
     // Ajout du reader
@@ -54,28 +55,21 @@
     // Ajout de la waitView
     [self.view addSubview:self.waitView];
     
-    if(!self.manga.imageURLs)
-    {
-        self.waitView.hidden = NO;
-        dispatch_async(dispatch_get_global_queue(2, 0), ^{
-            [self.manga fetchURLs];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.waitView.hidden = YES;
-                [self.readerView reloadData];
-                [self startLoadingImages];
-            });
-            
-        });
-        
-        
-    }
+    
+    [[UIApplication sharedApplication]setNetworkActivityIndicatorVisible:YES];
+    [self.chapter fetchImagesURL:^{
+        [[UIApplication sharedApplication]setNetworkActivityIndicatorVisible:NO];
+        self.waitView.hidden = YES;
+        [self.readerView reloadData];
+        [self startLoadingImages];
+    }];
 }
 
 - (NSURL *) urlForImageAtIndex:(NSInteger)index
 {
     NSFileManager * fm = [[NSFileManager alloc]init];
     NSURL * path = [[fm URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask] lastObject];
-    NSString * imageName = [NSString stringWithFormat:@"%@ - %d", self.manga.chapterTitle, index];
+    NSString * imageName = [NSString stringWithFormat:@"%@ - %d", self.chapter.subtitle, index];
     path = [path URLByAppendingPathComponent:imageName isDirectory:NO];
     [fm release];
     return path;
@@ -84,23 +78,26 @@
 - (void) startLoadingImages
 {
     
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        for(int i = 0; i < self.manga.imageURLs.count; i++)
+    [self.chapter.pages enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
+        Page * page = (Page *) obj;
+        int i = page.number.intValue;
+        
+        NSData * imageData = [NSData dataWithContentsOfURL:[self urlForImageAtIndex:i]];
+        
+        if(!imageData)
         {
-            NSData * imageData = [NSData dataWithContentsOfURL:[self urlForImageAtIndex:i]];
-            if(!imageData)
-            {
-                [self.manga fetchImageAtIndex:i andPerformBlock:^(NSData *imageData) {
-                    [imageData writeToURL:[self urlForImageAtIndex:i] atomically:YES];
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [self.readerView reloadViewAtIndex:i];
-                    });
-                }];
-            }
-            else [self.readerView reloadViewAtIndex:i];
             
+            [page  fetchImageData:^(NSData * imageData){
+                [imageData writeToURL:[self urlForImageAtIndex:i] atomically:YES];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.readerView reloadViewAtIndex:i];
+                });
+            }];
         }
-    });
+        else [self.readerView reloadViewAtIndex:i];
+
+        
+    }];
 }
 
 #pragma mark - lazy getter
@@ -127,7 +124,7 @@
 
 - (NSInteger)numberOfPageInReaderView:(FBReaderView *)imageReaderView
 {
-    return self.manga.imageURLs.count;
+    return self.chapter.pages.count;
 }
 
 - (UIView *)readerView:(FBReaderView *)readerView viewAtIndex:(NSInteger)index
@@ -177,7 +174,7 @@
 
 - (void)readerView:(FBReaderView *)readerView willPresentViewAtIndex:(NSInteger)index
 {
-    self.title = [NSString stringWithFormat:@"page %d / %d", index + 1, self.manga.imageURLs.count];
+    self.title = [NSString stringWithFormat:@"page %d / %d", index + 1, self.chapter.pages.count];
 }
 
 #pragma mark - TapDetectingImageViewDelegate

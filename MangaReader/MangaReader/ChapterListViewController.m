@@ -10,20 +10,11 @@
 
 @interface ChapterListViewController ()
 
-@property (nonatomic, retain) NSFetchedResultsController * fetcher;
+@property (nonatomic, retain) NSArray * mangas;
 
 @end
 
 @implementation ChapterListViewController
-@synthesize fetcher = _fetcher;
-@synthesize manga = _manga;
-
-- (void)dealloc
-{
-    [_manga release];
-    [_fetcher release];
-    [super dealloc];
-}
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -33,34 +24,22 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.title = self.manga.title;
-    
-    // Preparation de la requete de recherche
-    NSFetchRequest * request = [[NSFetchRequest alloc]initWithEntityName:@"Chapter"];
-    request.predicate = [NSPredicate predicateWithFormat:@"manga == %@", self.manga];
-    request.sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"number" ascending:NO]];
-    request.fetchBatchSize = 50;
-    self.fetcher = [[[NSFetchedResultsController alloc]initWithFetchRequest:request managedObjectContext:self.manga.managedObjectContext sectionNameKeyPath:nil cacheName:nil] autorelease];
-    [request release];
 
-    
     [self setPullDownToRefresh:YES];
-    
-    [self refresh];
 
 }
 
 - (void) refresh
 {
     [[UIApplication sharedApplication]setNetworkActivityIndicatorVisible:YES];
-    
-    [self.manga fetchChapters:^{
-        [[UIApplication sharedApplication]setNetworkActivityIndicatorVisible:NO];
-        [self.fetcher performFetch:nil];
+    [Manga fetchMangaListAndPerformBlock:^(NSSet *mangas) {
+        NSSortDescriptor * sd = [NSSortDescriptor sortDescriptorWithKey:@"chapterNumber" ascending:NO];
+        self.mangas = [mangas sortedArrayUsingDescriptors:[NSArray arrayWithObject:sd]];;
         [self.tableView reloadData];
+        [[UIApplication sharedApplication]setNetworkActivityIndicatorVisible:NO];
         [self endRefreshing];
     }];
+    
 }
 
 #pragma mark - Table view data source
@@ -68,13 +47,13 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return self.fetcher.sections.count;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [[self.fetcher.sections objectAtIndex:section] numberOfObjects];
+    return self.mangas.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -85,11 +64,8 @@
     if(!cell)
         cell = [[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     
-    Chapter * chapter = [self.fetcher objectAtIndexPath:indexPath];
-    
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@", self.manga.title, chapter.number];
-    
-    cell.detailTextLabel.text = chapter.subtitle;
+    cell.textLabel.text = [[self.mangas objectAtIndex:indexPath.row] mangaName];
+    cell.detailTextLabel.text = [[self.mangas objectAtIndex:indexPath.row] chapterTitle];
     
     return cell;
 }
@@ -98,10 +74,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Chapter * chapter = [self.fetcher objectAtIndexPath:indexPath];
-    
+    Manga * manga = [self.mangas objectAtIndex:indexPath.row];
     MangaViewController * vc = [[MangaViewController alloc]init];
-    vc.chapter = chapter;
+    vc.manga = manga;
     [self.navigationController pushViewController:vc animated:YES];
     [vc release];
 }

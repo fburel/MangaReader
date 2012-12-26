@@ -7,13 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Manga+MangaReaderFetcher.h"
-#import "Chapter+MangaReaderFetcher.h"
+#import "Manga.h"
 #import "MangaViewController.h"
 #import "UITableViewController+PullDownToRefresh.h"
 
 @interface ChapterListViewController : UITableViewController
 
-@property (readwrite, nonatomic, retain) Manga * manga;
 
 @end
