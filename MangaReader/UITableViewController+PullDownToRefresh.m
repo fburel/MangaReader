@@ -183,17 +183,17 @@ BOOL isDragging = NO;
 
 - (NSString *) textPull
 {
-    return NSLocalizedString(@"Pull down to refresh", nil);
+    return NSLocalizedString(@"Pull to refresh...", nil);
 }
 
 - (NSString *) textRelease
 {
-    return NSLocalizedString(@"Release to refresh", nil);
+    return NSLocalizedString(@"Release to refresh...", nil);
 }
 
 - (NSString *) textLoading
 {
-    return NSLocalizedString(@"Please wait...", nil);
+    return NSLocalizedString(@"Loading...", nil);
 }
 
 

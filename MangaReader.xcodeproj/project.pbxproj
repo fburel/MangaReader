@@ -10,7 +10,7 @@
 		0C318762168A7E9E000341C0 /* TapDetectingImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C318761168A7E9E000341C0 /* TapDetectingImageView.m */; };
 		0C72C207167E5226000A553A /* FBReaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C72C206167E5226000A553A /* FBReaderView.m */; };
 		0C7A35351689FB1500FFF5B1 /* UITableViewController+PullDownToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7A35341689FB1500FFF5B1 /* UITableViewController+PullDownToRefresh.m */; };
-		0C98D1861687609C003B0D1D /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C98D1851687609C003B0D1D /* arrow.png */; };
+		0C98D195168B2A1E003B0D1D /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C98D194168B2A1E003B0D1D /* arrow.png */; };
 		0CADFB71167CB306001B4490 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CADFB70167CB306001B4490 /* QuartzCore.framework */; };
 		0CBAB2301679384F00EA2E3C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CBAB22F1679384F00EA2E3C /* UIKit.framework */; };
 		0CBAB2321679384F00EA2E3C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CBAB2311679384F00EA2E3C /* Foundation.framework */; };
@@ -38,7 +38,7 @@
 		0C72C206167E5226000A553A /* FBReaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBReaderView.m; sourceTree = "<group>"; };
 		0C7A35331689FB1500FFF5B1 /* UITableViewController+PullDownToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewController+PullDownToRefresh.h"; sourceTree = "<group>"; };
 		0C7A35341689FB1500FFF5B1 /* UITableViewController+PullDownToRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewController+PullDownToRefresh.m"; sourceTree = "<group>"; };
-		0C98D1851687609C003B0D1D /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
+		0C98D194168B2A1E003B0D1D /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
 		0CADFB70167CB306001B4490 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0CBAB22B1679384F00EA2E3C /* MangaReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MangaReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CBAB22F1679384F00EA2E3C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -134,9 +134,9 @@
 		0C98D1841687607E003B0D1D /* PullToRefresh */ = {
 			isa = PBXGroup;
 			children = (
+				0C98D194168B2A1E003B0D1D /* arrow.png */,
 				0C7A35331689FB1500FFF5B1 /* UITableViewController+PullDownToRefresh.h */,
 				0C7A35341689FB1500FFF5B1 /* UITableViewController+PullDownToRefresh.m */,
-				0C98D1851687609C003B0D1D /* arrow.png */,
 			);
 			name = PullToRefresh;
 			path = MangaReader;
@@ -289,7 +289,7 @@
 				0CBAB2421679384F00EA2E3C /* Default.png in Resources */,
 				0CBAB2441679384F00EA2E3C /* Default@2x.png in Resources */,
 				0CBAB2461679384F00EA2E3C /* Default-568h@2x.png in Resources */,
-				0C98D1861687609C003B0D1D /* arrow.png in Resources */,
+				0C98D195168B2A1E003B0D1D /* arrow.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
