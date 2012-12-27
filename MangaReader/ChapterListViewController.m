@@ -50,7 +50,7 @@
     
     [self setPullDownToRefresh:YES];
     
-    [self refresh];
+    [self.fetcher performFetch:nil];
 
 }
 
