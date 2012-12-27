@@ -25,16 +25,19 @@
     [super dealloc];
 }
 
+
 - (void)viewWillAppear:(BOOL)animated
 {
     self.navigationController.navigationBarHidden = NO;
-    self.navigationController.toolbarHidden = NO;
+    self.navigationController.toolbarHidden = YES;
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     self.title = self.manga.title;
+    
+    self.clearsSelectionOnViewWillAppear = YES;
     
     // Preparation de la requete de recherche
     NSFetchRequest * request = [[NSFetchRequest alloc]initWithEntityName:@"Chapter"];

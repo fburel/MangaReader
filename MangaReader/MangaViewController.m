@@ -18,6 +18,8 @@
 @interface MangaViewController ()
 @property (nonatomic, retain) UIView * waitView;
 @property (nonatomic, retain) IBOutlet FBReaderView * readerView;
+@property (nonatomic, retain) ThumbnailPickerView * thumbnailPickerView;
+@property (nonatomic, retain) UILabel * loadingLabel;
 @end
 
 @implementation MangaViewController
@@ -25,6 +27,8 @@
 @synthesize chapter = _chapter;
 @synthesize waitView = _waitView;
 @synthesize readerView = _readerView;
+@synthesize thumbnailPickerView = _thumbnailPickerView;
+@synthesize loadingLabel = _loadingLabel;
 
 #define kTapDetectingImageViewTag        2202
 
@@ -35,7 +39,20 @@
     [_chapter release];
     [_waitView release];
     [_readerView release];
+    [_thumbnailPickerView release];
+    [_loadingLabel release];
     [super dealloc];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self.thumbnailPickerView removeFromSuperview];
+    [self.loadingLabel removeFromSuperview];
+}
+- (void)viewWillAppear:(BOOL)animated
+{
+    self.navigationController.navigationBarHidden = NO;
+    self.navigationController.toolbarHidden = NO;
 }
 
 - (void)toogleBarVisibility
@@ -50,40 +67,31 @@
 	// Do any additional setup after loading the view.
     
     self.title = self.chapter.subtitle;
+    
     self.view.backgroundColor = [UIColor blackColor];
     
     // Ajout du reader
-    if(!self.readerView) self.readerView = [[[FBReaderView alloc]initWithFrame:self.view.bounds] autorelease];
-    self.readerView.autoresizingMask = (UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth);
-    self.readerView.dataSource = self;
-    self.readerView.delegate = self;
     [self.view addSubview:self.readerView];
     
     // Ajout de la waitView
     [self.view addSubview:self.waitView];
     
-    
-    [[UIApplication sharedApplication]setNetworkActivityIndicatorVisible:YES];
+    // Texte de chargement
+    [self.navigationController.toolbar addSubview:self.loadingLabel];
+
     [self.chapter fetchImagesURL:^{
-        [[UIApplication sharedApplication]setNetworkActivityIndicatorVisible:NO];
         self.waitView.hidden = YES;
+        [self.loadingLabel removeFromSuperview];
+        [self.navigationController.toolbar addSubview:self.thumbnailPickerView];
         [self.readerView reloadData];
         [self startLoadingImages];
     }];
 }
 
-- (NSURL *) urlForImageAtIndex:(NSInteger)index
-{
-    NSFileManager * fm = [[NSFileManager alloc]init];
-    NSURL * path = [[fm URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask] lastObject];
-    NSString * imageName = [NSString stringWithFormat:@"%@ - %d", self.chapter.subtitle, index];
-    path = [path URLByAppendingPathComponent:imageName isDirectory:NO];
-    [fm release];
-    return path;
-    
-}
 - (void) startLoadingImages
 {
+    
+    [[UIApplication sharedApplication]setNetworkActivityIndicatorVisible:YES];
 
     [self.chapter.pages enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
         Page * page = (Page *) obj;
@@ -99,6 +107,11 @@
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self.readerView reloadViewAtIndex:i];
                     page.isDownloaded = [NSNumber numberWithBool:YES];
+                    [self.thumbnailPickerView reloadThumbnailAtIndex:i];
+                    if([self.chapter downloadedRate] == 1)
+                    {
+                       [[UIApplication sharedApplication]setNetworkActivityIndicatorVisible:NO];
+                    }
                 });
             }];
         }
@@ -124,6 +137,45 @@
     }
     
     return _waitView;
+}
+
+- (UILabel *)loadingLabel
+{
+    if(!_loadingLabel)
+    {
+        _loadingLabel = [[UILabel alloc]initWithFrame:self.navigationController.toolbar.bounds];
+        _loadingLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        _loadingLabel.text = NSLocalizedString(@"Loading...", nil);
+        _loadingLabel.textAlignment = NSTextAlignmentCenter;
+        _loadingLabel.backgroundColor = [UIColor clearColor];
+
+        
+    }
+    return _loadingLabel;
+}
+
+- (FBReaderView *)readerView
+{
+    if(!_readerView)
+    {
+        _readerView = [[FBReaderView alloc]initWithFrame:self.view.bounds];
+        _readerView.autoresizingMask = (UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth);
+        _readerView.dataSource = self;
+        _readerView.delegate = self;
+    }
+    return _readerView;
+}
+
+- (ThumbnailPickerView *)thumbnailPickerView
+{
+    if(!_thumbnailPickerView)
+    {
+        _thumbnailPickerView = [[ThumbnailPickerView alloc]initWithFrame:self.navigationController.toolbar.bounds];
+        _thumbnailPickerView.delegate = self;
+        _thumbnailPickerView.dataSource = self;
+        _thumbnailPickerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    }
+    return _thumbnailPickerView;
 }
 
 #pragma mark - FBReaderViewDataSource
@@ -178,9 +230,11 @@
     
 }
 
+#pragma mark - FBReaderViewDelegate
+
 - (void)readerView:(FBReaderView *)readerView willPresentViewAtIndex:(NSInteger)index
 {
-    self.title = [NSString stringWithFormat:@"page %d / %d", index + 1, self.chapter.pages.count];
+    self.thumbnailPickerView.selectedIndex = index;
 }
 
 #pragma mark - TapDetectingImageViewDelegate
@@ -216,6 +270,24 @@
     [scrollView viewWithTag:kTapDetectingImageViewTag].frame = [self centeredFrameForScrollView:scrollView andUIView:[scrollView viewWithTag:kTapDetectingImageViewTag]];
 }
                                                                 
+#pragma mark - ThumbnailPickerViewDataSource
+
+- (NSUInteger)numberOfImagesForThumbnailPickerView:(ThumbnailPickerView *)thumbnailPickerView
+{
+    return self.chapter.pages.count;
+}
+
+- (UIImage *)thumbnailPickerView:(ThumbnailPickerView *)thumbnailPickerView imageAtIndex:(NSUInteger)index
+{
+    return [[[UIImage alloc]initWithData:[NSData dataWithContentsOfURL:[self urlForImageAtIndex:index]]] autorelease];
+}
+
+#pragma mark - ThumbnailPickerViewDelegate
+
+- (void)thumbnailPickerView:(ThumbnailPickerView *)thumbnailPickerView didSelectImageWithIndex:(NSUInteger)index
+{
+    [self.readerView presentViewAtIndex:index];
+}
 
 #pragma mark Utility methods
 
@@ -260,6 +332,16 @@
     return zoomRect;
 }
 
+- (NSURL *) urlForImageAtIndex:(NSInteger)index
+{
+    NSFileManager * fm = [[NSFileManager alloc]init];
+    NSURL * path = [[fm URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask] lastObject];
+    NSString * imageName = [NSString stringWithFormat:@"%@ - %d", self.chapter.subtitle, index];
+    path = [path URLByAppendingPathComponent:imageName isDirectory:NO];
+    [fm release];
+    return path;
+    
+}
 
 @end
 

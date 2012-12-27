@@ -92,5 +92,8 @@
         [self presentPageAtIndex:(self.indexForPresentedView - 1) animated:YES];
 }
 
-
+- (void) presentViewAtIndex:(NSInteger)index
+{
+    [self presentPageAtIndex:index animated:NO];
+}
 @end
