@@ -8,13 +8,6 @@
 
 #import "MangaViewController.h"
 
-
-@interface Page (ImageFetcher)
-
-- (void) fetchImageData:(void(^)(NSData * imageData))completion;
-
-@end
-
 @interface MangaViewController ()
 @property (nonatomic, retain) UIView * waitView;
 @property (nonatomic, retain) IBOutlet FBReaderView * readerView;
@@ -84,15 +77,14 @@
         [self.loadingLabel removeFromSuperview];
         [self.navigationController.toolbar addSubview:self.thumbnailPickerView];
         [self.readerView reloadData];
-        [self startLoadingImages];
+        [self downloadMissingImages];
     }];
 }
 
-- (void) startLoadingImages
+- (void) downloadMissingImages
 {
+    dispatch_queue_t imageDLQ = dispatch_queue_create([self.chapter.subtitle UTF8String], NULL);
     
-    [[UIApplication sharedApplication]setNetworkActivityIndicatorVisible:YES];
-
     [self.chapter.pages enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
         Page * page = (Page *) obj;
         int i = page.number.intValue;
@@ -102,21 +94,25 @@
         if(!imageData)
         {
             
-            [page  fetchImageData:^(NSData * imageData){
-                [imageData writeToURL:[self urlForImageAtIndex:i] atomically:YES];
+            dispatch_async(imageDLQ, ^{
+                NSData * imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:page.serverURL]];
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    [imageData writeToURL:[self urlForImageAtIndex:i] atomically:YES];
                     [self.readerView reloadViewAtIndex:i];
                     page.isDownloaded = [NSNumber numberWithBool:YES];
                     [self.thumbnailPickerView reloadThumbnailAtIndex:i];
-                    if([self.chapter downloadedRate] == 1)
-                    {
-                       [[UIApplication sharedApplication]setNetworkActivityIndicatorVisible:NO];
-                    }
                 });
-            }];
+                
+            });
         }
-        else [self.readerView reloadViewAtIndex:i];
+        else
+        {
+            [self.readerView reloadViewAtIndex:i];
+            page.isDownloaded = [NSNumber numberWithBool:YES];
+        }
     }];
+    
+    dispatch_release(imageDLQ);
 }
 
 #pragma mark - lazy getter
@@ -343,21 +339,6 @@
     
 }
 
-@end
-
-
-
-@implementation Page (ImageFetcher)
-
-- (void)fetchImageData:(void (^)(NSData *))completion
-{
-    dispatch_async(dispatch_get_global_queue(2, 0), ^{
-        NSData * imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:self.serverURL]];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            completion(imageData);
-        });
-    });
-}
 @end
 
 
