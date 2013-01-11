@@ -8,11 +8,20 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MangaReader/FBReaderView.m"
-         timestampString = "377392891.978909"
+         timestampString = "378252061.902561"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "109"
-         endingLineNumber = "109">
+         startingLineNumber = "112"
+         endingLineNumber = "112">
       </FileBreakpoint>
    </FileBreakpoints>
+   <ExceptionBreakpoints>
+      <ExceptionBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         scope = "0"
+         stopOnStyle = "0">
+      </ExceptionBreakpoint>
+   </ExceptionBreakpoints>
 </Bucket>

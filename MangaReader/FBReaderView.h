@@ -31,4 +31,7 @@
 - (void) reloadViewAtIndex:(NSInteger)index;
 - (void)reloadData;
 
+- (void) presentViewAtIndex:(NSInteger)index;
+
+
 @end

@@ -1,20 +1,22 @@
 //
-//  Manga.m
+//  Chapter.m
 //  MangaReader
 //
 //  Created by florian BUREL on 26/12/12.
 //  Copyright (c) 2012 florian BUREL. All rights reserved.
 //
 
-#import "Manga.h"
 #import "Chapter.h"
+#import "Manga.h"
+#import "Page.h"
 
 
-@implementation Manga
+@implementation Chapter
 
-@dynamic title;
-@dynamic mainURL;
-@dynamic favourite;
-@dynamic chapters;
+@dynamic number;
+@dynamic subtitle;
+@dynamic url;
+@dynamic manga;
+@dynamic pages;
 
 @end

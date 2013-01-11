@@ -7,13 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Manga.h"
+#import "Chapter+MangaReaderFetcher.h"
 #import "FBReaderView.h"
+#import "TapDetectingImageView.h"
+#import "Chapter+DownloadedRate.h"
+#import "ThumbnailPickerView.h"
 
 @interface MangaViewController : UIViewController
-<FBReaderViewDatasource, FBReaderViewDelegate>
+<FBReaderViewDatasource, FBReaderViewDelegate, TapDetectingImageViewDelegate, UIScrollViewDelegate, ThumbnailPickerViewDataSource, ThumbnailPickerViewDelegate>
 
-@property (nonatomic, retain) Manga * manga;
+@property (nonatomic, retain) Chapter * chapter;
 
 
 @end

@@ -2,33 +2,28 @@
 //  Manga.h
 //  MangaReader
 //
-//  Created by florian BUREL on 13/12/12.
+//  Created by florian BUREL on 26/12/12.
 //  Copyright (c) 2012 florian BUREL. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
+@class Chapter;
 
+@interface Manga : NSManagedObject
 
-@interface Manga : NSObject
-
-@property (nonatomic, retain) NSString * mangaName;
-@property (nonatomic, retain) NSString * chapterTitle;
-@property (nonatomic, retain) NSNumber * chapterNumber;
-@property (nonatomic, retain) NSArray * imageURLs;
-@property (nonatomic, retain) NSURL * mainPageURL;
-
+@property (nonatomic, retain) NSString * title;
+@property (nonatomic, retain) NSString * mainURL;
+@property (nonatomic, retain) NSNumber * favourite;
+@property (nonatomic, retain) NSSet *chapters;
 @end
 
-@interface Manga (MangaReaderFetcher)
+@interface Manga (CoreDataGeneratedAccessors)
 
-+ (void) fetchMangaListAndPerformBlock:(void (^)(NSSet * mangas))mangaBlock;
-- (void) fetchURLs;
-
-@end
-
-@interface Manga (ImageLoader)
-
-- (void) fetchImageAtIndex:(NSUInteger)index andPerformBlock:(void(^) (NSData * imageData))block;
+- (void)addChaptersObject:(Chapter *)value;
+- (void)removeChaptersObject:(Chapter *)value;
+- (void)addChapters:(NSSet *)values;
+- (void)removeChapters:(NSSet *)values;
 
 @end

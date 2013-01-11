@@ -20,8 +20,6 @@ const NSString * kMangaURLDictionaryDescriptionKey = @"kMangaURLDictionaryDescri
 + (NSSet *) chaperListForMangaURL:(NSURL *)mangaMainPageURL
 {
  
-    mangaMainPageURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@103/one-piece.html", kWebServiceURL]];
-    
     NSMutableArray * chapterListURL = [NSMutableArray array];
     
     // Parsing
@@ -33,7 +31,7 @@ const NSString * kMangaURLDictionaryDescriptionKey = @"kMangaURLDictionaryDescri
     for (TFHppleElement *element in chapterNode)
     {
        
-        NSString * mangaURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.mangareader.net%@", [element objectForKey:@"href"]]];
+        NSString * mangaURL = [NSString stringWithFormat:@"http://www.mangareader.net%@", [element objectForKey:@"href"]];
         
         NSString * description = [[element firstChild] content];
         
@@ -88,7 +86,7 @@ const NSString * kMangaURLDictionaryDescriptionKey = @"kMangaURLDictionaryDescri
         
         NSLog(@"%@", [[imageElement firstChild]objectForKey:@"src"]);
 
-        [datas addObject:[NSURL URLWithString:[[imageElement firstChild]objectForKey:@"src"]]];
+        [datas addObject:[[imageElement firstChild]objectForKey:@"src"]];
     }
     
     return datas;

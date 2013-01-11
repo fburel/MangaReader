@@ -1,5 +1,5 @@
 //
-//  Manga.m
+//  Manga+MangaReaderFetcher.h
 //  MangaReader
 //
 //  Created by florian BUREL on 26/12/12.
@@ -8,13 +8,10 @@
 
 #import "Manga.h"
 #import "Chapter.h"
+#import "MangaReaderFetcher.h"
 
+@interface Manga (MangaReaderFetcher)
 
-@implementation Manga
-
-@dynamic title;
-@dynamic mainURL;
-@dynamic favourite;
-@dynamic chapters;
+- (void) fetchChapters:(void (^)())completion;
 
 @end
